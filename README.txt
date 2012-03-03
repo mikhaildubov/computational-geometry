@@ -4,7 +4,7 @@ The project contains simple implementations of basic computational geometry algo
 * Any segments intersection determining
 * Convex hull construction
    + Graham's scan - O(n*lg(n))
-   + Jarvis' march - O(n*h))
+   + Jarvis' march - O(n*h)
 * Closest points pair determining 
    + Sweeping line algorithm - O(n*lg(n))
    + Naive algorithm - O(n^2) 
