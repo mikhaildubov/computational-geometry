@@ -1,4 +1,4 @@
-The project contains simple implementations of basic computational geometry algorithms in Java. The current version includes:
+The project contains simple implementations and visualization tools for basic computational geometry algorithms in Java. The current version includes:
 
 * Two segments intersection determining
 * Any segments intersection determining
