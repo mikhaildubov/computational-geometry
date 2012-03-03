@@ -9,7 +9,7 @@ The project contains simple implementations of basic computational geometry algo
    + Sweeping line algorithm - O(n*lg(n))
    + Naive algorithm - O(n^2) 
 * Polygon triangulation
-   + "Ear clipping" (or Van Gogh) algorithm - O(n^3) / O(n^2)
+   + "Ear clipping" (Van Gogh) algorithm - O(n^3) / O(n^2)
    + Divide and conquer - O(n^4)
 
 
