@@ -2,15 +2,17 @@ The project contains simple implementations and visualization tools for basic co
 
 * Two segments intersection determining
 * Any segments intersection determining
+   + Sweeping line algorithm - O(n*lg(n))
+   + Naive algorithm - O(n^2)
 * Convex hull construction
    + Graham's scan - O(n*lg(n))
    + Jarvis' march - O(n*h)
 * Closest points pair determining 
-   + Sweeping line algorithm - O(n*lg(n))
+   + Divide&Conquer - O(n*lg(n))
    + Naive algorithm - O(n^2) 
 * Polygon triangulation
    + "Ear clipping" (Van Gogh) algorithm - O(n^3) / O(n^2)
-   + Divide and conquer - O(n^4)
+   + Divide&Conquer - O(n^4)
 
 
 The algorithms are described in the following books:
