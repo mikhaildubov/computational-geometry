@@ -8,6 +8,8 @@ package convexhull;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
 
 
 public class MainFrame extends javax.swing.JFrame {
@@ -266,6 +268,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<Point> points, convexHull;
-    int state;
+    private ArrayList<Point> points;
+    private Polygon convexHull;
+    private int state;
 }

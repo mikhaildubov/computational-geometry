@@ -3,6 +3,8 @@ package anysegmentsintersect;
 import java.util.ArrayList;
 import java.util.Random;
 import junit.framework.TestCase;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Segment;
 
 public class SegmentsIntersectTest extends TestCase {
     

@@ -3,10 +3,10 @@
  */
 package closestpair;
 
-import closestpair.Point;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import ru.hse.se.primitives.Point;
 
 /**
  *

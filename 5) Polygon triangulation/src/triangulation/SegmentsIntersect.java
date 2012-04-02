@@ -1,4 +1,5 @@
 package triangulation;
+import ru.hse.se.primitives.Point;
 
 public class SegmentsIntersect {
     

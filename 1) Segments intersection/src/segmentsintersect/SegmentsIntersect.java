@@ -4,9 +4,15 @@
  */
 package segmentsintersect;
 
+
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Segment;
+
 /**
- *
- * @author MSDubov
+ * Determines whether the two given segments intersect in O(1),
+ * as depicted in "Introduction to Algorithms" by T.Cormen et al.
+ * 
+ * @author Mikhail Dubov
  */
 public class SegmentsIntersect {
     
@@ -22,8 +28,13 @@ public class SegmentsIntersect {
                 pk.getY() <= Math.max(pi.getY(), pj.getY()));
     }
     
-    public static boolean segmentsIntersect(Point p1, Point p2,
-                                            Point p3, Point p4) {
+    public static boolean two(Segment s1, Segment s2) {
+        
+        Point p1 = s1.getLeft();
+        Point p2 = s1.getRight();
+        Point p3 = s2.getLeft();
+        Point p4 = s2.getRight();
+        
         double d1 = direction(p3, p4, p1);
         double d2 = direction(p3, p4, p2);
         double d3 = direction(p1, p2, p3);

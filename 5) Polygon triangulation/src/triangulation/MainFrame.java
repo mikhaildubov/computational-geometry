@@ -3,6 +3,9 @@ package triangulation;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
+import ru.hse.se.primitives.Triangle;
 
 
 public class MainFrame extends javax.swing.JFrame {

@@ -1,6 +1,9 @@
 package triangulation;
 
 import java.util.ArrayList;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
+import ru.hse.se.primitives.Triangle;
 
 
 public class VanGoghAlgorithm {
@@ -19,7 +22,7 @@ public class VanGoghAlgorithm {
         
         ArrayList<Triangle> result = new ArrayList<Triangle>();
         
-        AdvancedPolygon ap = new AdvancedPolygon(p);
+        VanGoghPolygon ap = new VanGoghPolygon(p);
         
         for(int i = 0; i < p.size() - 2; i++) {
             result.add(ap.removeEar());

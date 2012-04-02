@@ -1,13 +1,22 @@
 package convexhull;
 
 import java.util.*;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
 
+/**
+ * Builds the convex hull of a given set of points
+ * using different algorithms.
+ * 
+ * @author Mikhail Dubov
+ */
 public class ConvexHull {
     
     /**
-     * Построение выпуклой оболочки сканированием по Грэхему - O(n*log(n)).
+     * Builds the convex hull of a given set of points
+     * using the Graham's scan algorithm - O(n*log(n)).
      */ 
-    public static ArrayList<Point> Graham(ArrayList<Point> pointsList) {
+    public static Polygon Graham(ArrayList<Point> pointsList) {
         
         // Список точек будет меняться (предполагаем, что pointsList.size >= 3)
         
@@ -62,14 +71,16 @@ public class ConvexHull {
         }
         Collections.reverse(polygon);
         
-        return polygon;
+        return new Polygon(polygon);
     }
     
     /**
-     * Построение выпуклой оболочки обходом по Джарвису - O(n*h),
-     * h - число вершин оболочки (т.е. худший случай - O(n^2)).
+     * Builds the convex hull of a given set of points
+     * using the Jarvis' march algorithm - O(n*h),
+     * where h is the number of vertises in the hull,
+     * so the worst case is O(n^2).
      */
-    public static ArrayList<Point> Jarvis(ArrayList<Point> pointsList) {
+    public static Polygon Jarvis(ArrayList<Point> pointsList) {
         
         // Список точек будет меняться (предполагаем, что pointsList.size >= 3)
         
@@ -119,12 +130,12 @@ public class ConvexHull {
         // Оболочка построена, возвращается список точек
         // в порядке обхода против часовой стрелки
         
-        return result;
+        return new Polygon(result);
     }
     
     /**
-     * Осуществляет сравнение точек по их полярному углу
-     * с помощью векторного произведения.
+     * Compares two points by their polar angles
+     * using the cross product.
      */
     static class PointComparator implements Comparator<Point> {
         

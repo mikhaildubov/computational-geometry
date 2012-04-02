@@ -1,6 +1,8 @@
 package triangulation;
 
 import junit.framework.TestCase;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
 
 public class VanGoghAlgorithmTest extends TestCase {
 

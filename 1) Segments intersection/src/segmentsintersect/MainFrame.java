@@ -12,6 +12,8 @@ package segmentsintersect;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Segment;
 
 /**
  *
@@ -131,7 +133,9 @@ public class MainFrame extends javax.swing.JFrame {
             p3 = new Point(evt.getX(), evt.getY());
         } else if (c == 3) {
             p4 = new Point(evt.getX(), evt.getY());
-            intersection = SegmentsIntersect.segmentsIntersect(p1, p2, p3, p4);
+            Segment s1 = new Segment(p1, p2);
+            Segment s2 = new Segment(p3, p4);
+            intersection = SegmentsIntersect.two(s1, s2);
         }
         
         c++;

@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Random;
 import junit.framework.TestCase;
 
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Polygon;
+
 public class ConvexHullTest extends TestCase {
     
-    private void checkConvexHull(ArrayList points) {
+    private void checkConvexHull(ArrayList<Point> points) {
         
         // printPointsList(points); System.out.println();
         
-        ArrayList CH_Graham = ConvexHull.Graham(points);
-        ArrayList CH_Jarvis = ConvexHull.Jarvis(points);
+        Polygon CH_Graham = ConvexHull.Graham(points);
+        Polygon CH_Jarvis = ConvexHull.Jarvis(points);
         
          //printPointsList(CH_Graham); System.out.println();
          //printPointsList(CH_Jarvis); System.out.println();
@@ -22,9 +25,9 @@ public class ConvexHullTest extends TestCase {
         }
         
         for (int i = 0; i < CH_Graham.size(); i++) {
-            if(! ((Point) CH_Graham.get(i)).equals((Point) CH_Jarvis.get(i))) {
-                fail("Different points: " + ((Point) CH_Graham.get(i)) +
-                        " in Graham and " + ((Point) CH_Jarvis.get(i)) +
+            if(! (CH_Graham.get(i)).equals(CH_Jarvis.get(i))) {
+                fail("Different points: " + (CH_Graham.get(i)) +
+                        " in Graham and " + (CH_Jarvis.get(i)) +
                         " in Jarvis.");
             }
         }
@@ -34,7 +37,7 @@ public class ConvexHullTest extends TestCase {
     
     public void testConvexHull_Example() {
         
-        ArrayList points = new ArrayList();
+        ArrayList<Point> points = new ArrayList<Point>();
         points.add(new Point(1, 0));
         points.add(new Point(2, 7));
         points.add(new Point(20, 10)); // !!!
@@ -51,7 +54,7 @@ public class ConvexHullTest extends TestCase {
         Random rand = new Random();
         
         for (int n = 3; n <= 20; n++) {
-            ArrayList points = new ArrayList();
+            ArrayList<Point> points = new ArrayList<Point>();
             
             for(int i = 0; i < n; i++) {
                 points.add(new Point(rand.nextDouble()*100,
@@ -62,9 +65,9 @@ public class ConvexHullTest extends TestCase {
         }
     }
     
-    private static void printPointsList(ArrayList points) {
-        for (Object o : points) {
-            System.out.println((Point) o);
+    private static void printPointsList(ArrayList<Point> points) {
+        for (Point p : points) {
+            System.out.println(p);
         }
     }
 }

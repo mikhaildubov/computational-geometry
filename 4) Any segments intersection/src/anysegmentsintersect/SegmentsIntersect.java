@@ -3,18 +3,19 @@ package anysegmentsintersect;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 import java.util.TreeSet;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Segment;
 
 
 public class SegmentsIntersect {
     
     /**
-     * Определяет, пересекаются ли какие-либо два отрезка из множества,
-     * наивным методом за O(n^2).
+     * Determines whether any two segments in the given set intersect
+     * using the naive approach in O(n^2).
      * 
-     * @param segments Множество отрезков
-     * @return true, если есть пересекающиеся отрезки, false иначе
+     * @param segments The set of segments
+     * @return true, if any segments intersect, false otherwise
      */
     public static boolean any_naive(ArrayList<Segment> segments) {
         for (int i = 0; i < segments.size() - 1; i++) {
@@ -33,11 +34,11 @@ public class SegmentsIntersect {
     }
     
     /**
-     * Определяет, пересекаются ли какие-либо два отрезка из множества,
-     * методом "выметающей прямой" за O(n*lg(n)).
+     * Determines whether any two segments in the given set intersect
+     * using the "sweeping line" algorithm in O(n*lg(n)).
      * 
-     * @param segments Множество отрезков
-     * @return true, если есть пересекающиеся отрезки, false иначе
+     * @param segments The set of segments
+     * @return true, if any segments intersect, false otherwise
      */
     public static boolean any(ArrayList<Segment> segments) {
         
@@ -113,9 +114,10 @@ public class SegmentsIntersect {
     }
     
     /**
-     * Возвращает пару пересекающихся отрезков (одну из пар).
+     * Returns a pair of intersecting segments.
+     * (to be called after the algorithm finished its work).
      * 
-     * @return Объект ArrayList из двух элементов
+     * @return ArrayList that contains the required pair.
      */
     public static ArrayList<Segment> intersectingSegments() {
         ArrayList<Segment> result = new ArrayList<Segment>();
@@ -127,11 +129,11 @@ public class SegmentsIntersect {
     }
     
     /**
-     * Определяет, пересекаются ли два отрезка (за O(1)).
+     * Determines whether the two segments intersect in O(1).
      * 
-     * @param s1 Первый отрезок
-     * @param s2 Второй отрезок
-     * @return true, если отрезки пересекаются, false иначе
+     * @param s1 The first segment
+     * @param s2 The second segment
+     * @return true, if the segments intersect, false otherwise
      */
     public static boolean two(Segment s1, Segment s2) {
         
@@ -173,45 +175,12 @@ public class SegmentsIntersect {
                 pk.getY() <= Math.max(pi.getY(), pj.getY()));
     }
     
-    // Инициализация компараторов
-    static {
-        segmentsComparator = new SegmentsComparator();
-        
-        PointsComparatorX = new Comparator<Point>() {
-            
-            public int compare(Point p1, Point p2) {
-                if (p1.getX() < p2.getX()) {
-                    return -1;
-                } else if (p1.getX() > p2.getX()) {
-                    return 1;
-                } else {
-                    // В случае совпадений иксов - распределение
-                    // сначала левые, потом правые:
-                    if (p1.isLeft() && p2.isRight()) {
-                        return -1;
-                    } else if (p1.isRight() && p2.isLeft()) {
-                        return 1;
-                    } else {
-                        // В случае совпадений конечности -
-                        // распределение по y
-                        if (p1.getY() < p2.getY()) {
-                            return -1;
-                        } else if (p1.getY() > p2.getY()) {
-                            return 1;
-                        } else {
-                            return 0;
-                        }
-                    }
-                }
-            }
-        };
-    }
-    
     /**
-     * Сравнивает два отрезка в некоторой координате x.
+     * Compares two segments in some X coordinate.
      */
     static class SegmentsComparator implements Comparator<Segment>  {
 
+        @Override
         public int compare(Segment s1, Segment s2) {
 
             // 1. Точки не сравнимы в координате x
@@ -265,14 +234,16 @@ public class SegmentsIntersect {
         }
 
         /**
-         * Задает координату x, в которой происходит сравнение.
-         * 
-         * @param x Координата x
+         * sets the X coordinate to perform the comparison in.
          */
         public void setX(double x) {
             this.x = x;
         }
 
+        /**
+         * Calculates the Y coordinate of a point on the
+         * segment by its X coordinate.
+         */
         private double yForX(Segment s, double x) {
             return (s.getRight().getX()*s.getLeft().getY() -
                     s.getLeft().getX()*s.getRight().getY() -
@@ -283,16 +254,52 @@ public class SegmentsIntersect {
         private double x;
     }
     
-    // Алгоритм требует двух компараторов:
-    // для сравнения отрезков в координате x
-    // (используется при упорядочении красно-черного дерева),
-    // а также для начальной сортировки точек "слева направо".
+    
+    
+    // Comparators initialization
+    static {
+        segmentsComparator = new SegmentsComparator();
+        
+        PointsComparatorX = new Comparator<Point>() {
+            
+            public int compare(Point p1, Point p2) {
+                if (p1.getX() < p2.getX()) {
+                    return -1;
+                } else if (p1.getX() > p2.getX()) {
+                    return 1;
+                } else {
+                    // В случае совпадений иксов - распределение
+                    // сначала левые, потом правые:
+                    if (p1.isLeft() && p2.isRight()) {
+                        return -1;
+                    } else if (p1.isRight() && p2.isLeft()) {
+                        return 1;
+                    } else {
+                        // В случае совпадений конечности -
+                        // распределение по y
+                        if (p1.getY() < p2.getY()) {
+                            return -1;
+                        } else if (p1.getY() > p2.getY()) {
+                            return 1;
+                        } else {
+                            return 0;
+                        }
+                    }
+                }
+            }
+        };
+    }
+    
+    // The sweeping line algorithm requires two comparators:
+    // the one for comparing two segments in some X coordinate
+    // (user in the RB-tree), and the other for the 
+    // initial points sorting "from the left to the right".
     private static SegmentsComparator segmentsComparator;
     private static Comparator<Point> PointsComparatorX;
     
-    // Для учета граничных случаев
+    // Dealing with the boundary cases
     private static boolean foundBoundaryCase;
     
-    // Будем запоминать отрезки, которые пересекаются
+    // Here a pair of intersecting segments is stored
     private static Segment segm1, segm2;
 }

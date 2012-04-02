@@ -3,6 +3,8 @@ package anysegmentsintersect;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
+import ru.hse.se.primitives.Point;
+import ru.hse.se.primitives.Segment;
 
 /**
  *

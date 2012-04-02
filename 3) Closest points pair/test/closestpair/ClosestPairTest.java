@@ -3,13 +3,14 @@ package closestpair;
 import java.util.ArrayList;
 import java.util.Random;
 import junit.framework.TestCase;
+import ru.hse.se.primitives.Point;
 
 
 public class ClosestPairTest extends TestCase {
     
     private void checkClosestPair(ArrayList points) {
-        ArrayList resNaive = ClosestPair.Naive(points);
-        ArrayList resFast = ClosestPair.Fast(points);
+        ArrayList<Point> resNaive = ClosestPair.Naive(points);
+        ArrayList<Point> resFast = ClosestPair.Fast(points);
         
         if(resNaive.size() != 2) {
             fail("Naive method returns not a pair of points.");
@@ -19,8 +20,8 @@ public class ClosestPairTest extends TestCase {
         }
         
         // Используем расстояния, а не конкретные точки: может быть несколько пар!
-        if (ClosestPair.dist((Point)resNaive.get(0), (Point)resNaive.get(1)) !=
-            ClosestPair.dist((Point)resFast.get(0), (Point)resFast.get(1))) {
+        if (ClosestPair.dist(resNaive.get(0), resNaive.get(1)) !=
+            ClosestPair.dist(resFast.get(0), resFast.get(1))) {
             fail("Pairs returned by the naive and fast methods are different.");
         }
         
@@ -30,7 +31,7 @@ public class ClosestPairTest extends TestCase {
     
     public void testClosestPair_Example() {
         // Boundary case - X coordinates are equal
-        ArrayList points = new ArrayList();
+        ArrayList<Point> points = new ArrayList<Point>();
         points.add(new Point(100, 100));
         points.add(new Point(100, 102));
         points.add(new Point(100, 103));
@@ -55,7 +56,7 @@ public class ClosestPairTest extends TestCase {
         Random rand = new Random();
         
         for (int n = 3; n <= 100; n++) {
-            ArrayList points = new ArrayList();
+            ArrayList<Point> points = new ArrayList<Point>();
             
             for(int i = 0; i < n; i++) {
                 points.add(new Point(rand.nextDouble()*100,

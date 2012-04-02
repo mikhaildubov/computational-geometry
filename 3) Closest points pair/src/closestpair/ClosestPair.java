@@ -4,10 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import ru.hse.se.primitives.Point;
+
+/**
+ * Finds the pair of closest points using different algorithms.
+ * 
+ * @author Mikhail Dubov
+ */
 public class ClosestPair {
     
     /**
-     * Поиск пары ближайших точек наивным методом за O(n^2).
+     * Finds the pair of closest points using a naive method in O(n^2).
      */
     public static ArrayList<Point> Naive(ArrayList<Point> points) {
         Point p0 = points.get(0);
@@ -30,7 +37,8 @@ public class ClosestPair {
     }
 
     /**
-     * Поиск пары ближайших точек методом "разделяй и властвуй" за O(n*log(n)).
+     * Finds the pair of closest points using
+     * a "divide and conquer" algorithm in O(n*log(n)).
      */
     public static ArrayList<Point> Fast(ArrayList<Point> points) {
         ArrayList<Point> X = (ArrayList<Point>)points.clone();
@@ -42,6 +50,9 @@ public class ClosestPair {
         return ClosestPair(X, Y);
     }
 
+    /**
+     * The recursive procedure for the "Fast" algorithm.
+     */
     private static ArrayList<Point> ClosestPair(ArrayList<Point> X, ArrayList<Point> Y) {
                 
         ArrayList<Point> resultPair = new ArrayList<Point>();

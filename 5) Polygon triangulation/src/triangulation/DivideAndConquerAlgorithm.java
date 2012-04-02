@@ -1,6 +1,8 @@
 package triangulation;
 
 import java.util.ArrayList;
+import ru.hse.se.primitives.Polygon;
+import ru.hse.se.primitives.Triangle;
 
 public class DivideAndConquerAlgorithm {
     
@@ -8,6 +10,7 @@ public class DivideAndConquerAlgorithm {
      * O(n^4) worst case (!)
      */
     public static ArrayList<Triangle> triangulate(Polygon p) {
+        
         result = new ArrayList<Triangle>();
         
         isClockwise = p.isClockwise();
@@ -27,8 +30,6 @@ public class DivideAndConquerAlgorithm {
             return;
         }
         
-        boolean isClockwise = p.isClockwise();
-        
         boolean diag = true;
         int start = 0, finish = 0;
         int prev = 0, next = 0;
@@ -38,7 +39,8 @@ public class DivideAndConquerAlgorithm {
             for (int j = i+2; j < p.size(); j++) {
                 
                 if (i == j || Math.abs(i-j) == 1 ||
-                   (i == p.size()-1 && j == 0)) {
+                   (i == p.size()-1 && j == 0) ||
+                   (j == p.size()-1 && i == 0)) {
                     continue; // not even a candidate to be a diagonal
                 }
                 
