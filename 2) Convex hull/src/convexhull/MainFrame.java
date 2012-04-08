@@ -45,9 +45,9 @@ public class MainFrame extends javax.swing.JFrame {
 
                 if (state == 1) { // Рисуем оболочку
                     Point cur, next;
-                    for(int i = 0; i < convexHull.size() - 1; i++) {
+                    for(int i = 0; i < convexHull.size(); i++) {
                         cur = convexHull.get(i);
-                        next = convexHull.get(i + 1);
+                        next = convexHull.get((i + 1) % convexHull.size());
                         g.drawLine((int)cur.getX(), (int)(getHeight() - cur.getY()),
                             (int)next.getX(), (int)(getHeight() - next.getY()));
                     }
@@ -184,7 +184,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (points.size() < 3) return;
         
         convexHull = ConvexHull.Graham(points);
-        convexHull.add(convexHull.get(0)); // Дублируем конечную точку, чтобы оболочка замкнулась
+        
         state = 1;
         
         jPanel1.repaint();
@@ -194,7 +194,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (points.size() < 3) return;
         
         convexHull = ConvexHull.Jarvis(points);
-        convexHull.add(convexHull.get(0)); // Дублируем конечную точку, чтобы оболочка замкнулась
+        
         state = 1;
         
         jPanel1.repaint();

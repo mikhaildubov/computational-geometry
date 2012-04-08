@@ -16,7 +16,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        segments = new ArrayList();
+        segments = new ArrayList<Segment>();
         state = 0;
     }
 
@@ -217,7 +217,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
-        anyIntersect = SegmentsIntersect.any_naive(segments);
+        anyIntersect = SegmentsIntersect.any_Naive(segments);
         intersecting = SegmentsIntersect.intersectingSegments();
         
         state = 2;
@@ -226,7 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        segments = new ArrayList();
+        segments = new ArrayList<Segment>();
         state = 0;
         
         jPanel1.repaint();

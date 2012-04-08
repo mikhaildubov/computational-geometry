@@ -98,11 +98,11 @@ public class ConvexHull {
         Point pE = points.get(0);
         Point candidate;
         for(int i = 1; i < points.size(); i++) {
-                candidate = points.get(i);
-                if(crossProduct(p0, candidate, pE) < 0) {
-                    pE = candidate;
-                }
+            candidate = points.get(i);
+            if(crossProduct(p0, candidate, pE) < 0) {
+                pE = candidate;
             }
+        }
         
         // Строим цепь - O(h) шагов...
         

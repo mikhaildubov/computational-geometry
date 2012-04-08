@@ -17,7 +17,7 @@ public class SegmentsIntersect {
      * @param segments The set of segments
      * @return true, if any segments intersect, false otherwise
      */
-    public static boolean any_naive(ArrayList<Segment> segments) {
+    public static boolean any_Naive(ArrayList<Segment> segments) {
         for (int i = 0; i < segments.size() - 1; i++) {
             for (int j = i + 1; j < segments.size(); j++) {
                 if (SegmentsIntersect.two(segments.get(i), segments.get(j))) {

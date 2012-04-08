@@ -74,7 +74,7 @@ public class SegmentsIntersectTest extends TestCase {
                 }
 
                 assertTrue(SegmentsIntersect.any(segments) ==
-                            SegmentsIntersect.any_naive(segments));
+                            SegmentsIntersect.any_Naive(segments));
             }
         }
         

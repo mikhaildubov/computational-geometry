@@ -57,6 +57,10 @@ public class Point {
         return this.equals(segment.getRight());
     }
     
+    public boolean isNaP() {
+        return x == Double.NaN || y == Double.NaN;
+    }
+    
     
     public final static Point NaP = new Point(Double.NaN, Double.NaN);
     

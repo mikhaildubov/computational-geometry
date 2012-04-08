@@ -57,6 +57,10 @@ public class Polygon implements Cloneable {
         return vertices.size();
     }
     
+    public boolean isEmpty() {
+        return vertices.isEmpty();
+    }
+    
     public Point get(int i) {
         if (i >= 0 && i < size()) {
             return vertices.get(i);
