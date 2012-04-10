@@ -20,77 +20,77 @@ The project contains both implementations and visualization tools for basic comp
 
 ### __Any segments intersection__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Sweeping line algorithm - <b><em>O(n&#183;lg(n))</em></b>
  <li>Naive algorithm - <b><em>O(n<sup>2</sup>)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s54.radikal.ru/i144/1204/81/406cd8516cc6.png"/>
 </td>
 </table><br>
 
 ### __Convex hull construction__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Graham's scan - <b><em>O(n&#183;lg(n))</em></b>
  <li>Jarvis' march - <b><em>O(n&#183;h)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i634/1204/9f/1aa976460cbe.png"/>
 </td>
 </table><br>
 
 ### __Closest points pair determining__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Divide&Conquer - <b><em>O(n&#183;lg(n))</em></b>
  <li>Naive algorithm - <b><em>O(n<sup>2</sup>)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i601/1204/05/bb15b09ddb9a.png"/>
 </td>
 </table><br>
 
 ### __Polygon triangulation__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>"Ear clipping" (Van Gogh) algorithm (improved) - <b><em>O(n<sup>2</sup>)</em></b>
  <li>"Ear clipping" (Van Gogh) algorithm (naive) - <b><em>O(n<sup>3</sup>)</em></b>
  <li>Primitive Divide&Conquer algorithm - <b><em>O(n<sup>4</sup>)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i630/1204/51/974473c1af22.png"/>
 </td>
 </table><br>
 
 ### __Point set Delaunay triangulation__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Brute force "Edge flipping" algorithm
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i616/1204/f6/fe8dd6bf26d1.png"/>
 </td>
 </table><br>
 
 ### __Halfplanes intersection__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Incremental algorithm - <b><em>O(n<sup>2</sup>)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i618/1204/4e/8e367bf8d9be.png"/>
 </td>
 </table><br><br><br>
