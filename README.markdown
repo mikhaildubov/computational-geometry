@@ -79,7 +79,7 @@ The project contains both implementations and visualization tools for basic comp
 </ul>
 </td>
 <td align = "right" width = "50%">
-<img src = "http://s48.radikal.ru/i119/1204/50/3bdd8ad93a1e.png"/>
+<img src = "http://i080.radikal.ru/1204/5a/ea82371dc55e.png"/>
 </td>
 </table><br>
 
@@ -95,15 +95,15 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br><br><br>
 
-## Books where the algorithms are described:
-![CLRS](http://mitpress.mit.edu/images/products/books/9780262033848-medium.jpg "Introduction to algorithms. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein")&nbsp;
+## Reference books:
+![CLRS](http://mitpress.mit.edu/images/products/books/9780262033848-medium.jpg "Introduction to algorithms. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein")&nbsp;
 ![deBerg](http://www.cs.uu.nl/geobook/cover3small.jpg "Computational Geometry: Algorithms and applications. Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars")&nbsp;
 ![Skiena](http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg "The Algorithm Design Manual. Steven S. Skiena")&nbsp;
 ![SkienaRevilla](http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg "Programming Challenges. Steven S. Skiena, Miguel Revilla")&nbsp;
 ![Knuth](http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg "Axioms and Hulls. Donald E. Knuth")&nbsp;
 
-* __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest, and Clifford Stein
+* __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
 * __"Computational Geometry: Algorithms and Applications"__ by Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars
-* __"The Algorithm Design Manual"__ by Steven S. Skiena and Miguel Revilla
+* __"The Algorithm Design Manual"__ by Steven S. Skiena
 * __"Programming Challenges"__ by Steven S. Skiena and Miguel Revilla
 * __"Axioms and hulls"__ by Donald E. Knuth
