@@ -1,6 +1,6 @@
 # Computational geometry in Java
 
-The project contains both implementations and visualization tools for basic computational geometry algorithms in Java.<br><br>
+The project contains both implementations and visualization tools for basic computational geometry algorithms in two-dimensional space. These algorithms are implemented in Java programming language and are visualized using the Swing libraries.<br><br>
 
 ## List of implemented algorithms:
 
@@ -21,7 +21,9 @@ The project contains both implementations and visualization tools for basic comp
  * "Ear clipping" (Van Gogh) algorithm (improved) - *__O(n<sup>2</sup>)__*
  * "Ear clipping" (Van Gogh) algorithm (naive) - *__O(n<sup>3</sup>)__*
  * Primitive Divide&Conquer algorithm - *__O(n<sup>4</sup>)__*<br><br>
-6. __Halfplanes intersection__
+6. __Polygon triangulation__
+ * Brute force "Edge flipping" algorithm (improved)
+7. __Halfplanes intersection__
  * Incremental algorithm - *__O(n<sup>2</sup>)__*<br><br><br>
 
 ## Books where the algorithms are described:

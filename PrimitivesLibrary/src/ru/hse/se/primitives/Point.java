@@ -29,6 +29,11 @@ public class Point {
                 (p2.getX() - p0.getX()) * (p1.getY() - p0.getY());
     }
     
+    public double dist(Point p0) {
+        return Math.sqrt((this.getX() - p0.getX()) * (this.getX() - p0.getX()) +
+                         (this.getY() - p0.getY()) * (this.getY() - p0.getY()));
+    }
+    
     public static boolean isLeftTurn(Point p0, Point p1, Point p2) {
         return (crossProduct(p0, p1, p2) > 0);
     }
@@ -39,6 +44,11 @@ public class Point {
     
     @Override
     public boolean equals(Object o2) {
+        
+        if (! (o2 instanceof Point)) {
+            return false;
+        }
+        
         Point p2 = (Point) o2;
         
         return (this.getX() == p2.getX() && this.getY() == p2.getY());

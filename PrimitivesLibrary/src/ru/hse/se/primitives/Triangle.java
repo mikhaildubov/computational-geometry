@@ -54,5 +54,14 @@ public class Triangle {
         return c;
     }
     
+    public Point getIth(int i) {
+        switch (i) {
+            case 0: return a; 
+            case 1: return b;
+            case 2: return c;
+            default: return null;
+        }
+    }
+    
     private Point a, b, c;
 }

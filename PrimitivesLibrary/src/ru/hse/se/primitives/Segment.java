@@ -26,6 +26,22 @@ public class Segment {
         return right;
     }
     
+    
+    @Override
+    public boolean equals(Object o2) {
+        
+        if (! (o2 instanceof Segment)) {
+            return false;
+        }
+        
+        Segment s2 = (Segment) o2;
+        
+        return ((this.getLeft().equals(s2.getLeft()) &&
+                    this.getRight().equals(s2.getRight())) ||
+                (this.getLeft().equals(s2.getRight()) &&
+                    this.getRight().equals(s2.getLeft())));
+    }
+    
     final private Point left;
     final private Point right;
 }
