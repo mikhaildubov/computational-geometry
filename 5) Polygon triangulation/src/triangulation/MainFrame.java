@@ -15,6 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         polygon = new Polygon();
+        tempPolygon = new Polygon();
         state = 0;
     }
 
@@ -47,11 +48,13 @@ public class MainFrame extends javax.swing.JFrame {
 
                 g.setColor(Color.BLACK);
 
-                for (int i = 0; i < polygon.size(); i++) {
-                    g.fillOval((int)polygon.get(i).getX() - 3,
-                        (int)(getHeight() - polygon.get(i).getY() - 3), 5, 5);
-                    g.drawLine((int)polygon.get(i).getX(), (int)(getHeight() - polygon.get(i).getY()),
-                        (int)polygon.get((i+1) % polygon.size()).getX(), (int)(getHeight() - polygon.get((i+1) % polygon.size()).getY()));
+                for (int i = 0; i < tempPolygon.size(); i++) {
+                    g.fillOval((int)tempPolygon.get(i).getX() - 3,
+                        (int)(getHeight() - tempPolygon.get(i).getY() - 3), 5, 5);
+                    g.drawLine((int)tempPolygon.get(i).getX(),
+                        (int)(getHeight() - tempPolygon.get(i).getY()),
+                        (int)tempPolygon.get((i+1) % tempPolygon.size()).getX(),
+                        (int)(getHeight() - tempPolygon.get((i+1) % tempPolygon.size()).getY()));
                 }
             }
         };
@@ -70,8 +73,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                jPanel1MouseExited(evt);
+            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jPanel1MousePressed(evt);
+            }
+        });
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel1MouseMoved(evt);
             }
         });
 
@@ -212,7 +226,8 @@ public class MainFrame extends javax.swing.JFrame {
         if (triangulation != null) {
             state = 1;
         } else {
-            polygon = new Polygon();
+            polygon = new Polygon();            
+            tempPolygon = new Polygon();
         }
         
         jPanel1.repaint();
@@ -227,6 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
             state = 1;
         } else {
             polygon = new Polygon();
+            tempPolygon = new Polygon();
         }
         
         jPanel1.repaint();
@@ -240,6 +256,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         polygon = new Polygon();
+        tempPolygon = new Polygon();
         state = 0;
         
         jPanel1.repaint();
@@ -249,6 +266,10 @@ public class MainFrame extends javax.swing.JFrame {
         if (state == 0) {
             Point pi = new Point(evt.getX(), jPanel1.getHeight() - evt.getY());
             polygon.add(pi);
+            
+            tempPolygon.remove(tempPolygon.size() - 1);
+            tempPolygon.add(pi);
+            tempPolygon.add(pi);
         }
         
         jPanel1.repaint();
@@ -267,10 +288,41 @@ public class MainFrame extends javax.swing.JFrame {
             state = 1;
         } else {
             polygon = new Polygon();
+            tempPolygon = new Polygon();
         }
         
         jPanel1.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jPanel1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseMoved
+        
+        if (state == 0) {
+            Point pi = new Point(evt.getX(), jPanel1.getHeight() - evt.getY());
+            tempPolygon.remove(tempPolygon.size() - 1);
+            tempPolygon.add(pi);
+        }
+        
+        jPanel1.repaint();
+    }//GEN-LAST:event_jPanel1MouseMoved
+
+    private void jPanel1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseExited
+        
+        if (state == 0) {
+            tempPolygon.remove(tempPolygon.size() - 1);
+        }
+        
+        jPanel1.repaint();
+    }//GEN-LAST:event_jPanel1MouseExited
+
+    private void jPanel1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseEntered
+        
+        if (state == 0) {
+            Point pi = new Point(evt.getX(), jPanel1.getHeight() - evt.getY());
+            tempPolygon.add(pi);
+        }
+        
+        jPanel1.repaint();
+    }//GEN-LAST:event_jPanel1MouseEntered
 
     /**
      * @param args the command line arguments
@@ -320,7 +372,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
 
-    private Polygon polygon;
+    private Polygon polygon; // for calculating the triangulation
+    private Polygon tempPolygon; // for visualisation
     private ArrayList<Triangle> triangulation;
     int state;
 }
