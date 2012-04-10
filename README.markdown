@@ -44,7 +44,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Closest points pair determining__
+### __Closest points pair__
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -79,7 +79,7 @@ The project contains both implementations and visualization tools for basic comp
 </ul>
 </td>
 <td align = "right" width = "50%">
-<img src = "http://s019.radikal.ru/i616/1204/f6/fe8dd6bf26d1.png"/>
+<img src = "http://s48.radikal.ru/i119/1204/50/3bdd8ad93a1e.png"/>
 </td>
 </table><br>
 
