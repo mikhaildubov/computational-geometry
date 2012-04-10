@@ -34,11 +34,13 @@ public class PolygonTriangulation {
         for (int i = 0; i < points.size(); i++) {
             
             if (i < points.size() - 1) {
-                // Adding new ""
+                
+                // Adding new "narrow" triangle with p0 as one of its vertices                
                 result.add(new Triangle(p0, points.get(i), points.get(i+1)));
             }
             
             if (i > 0) {
+                
                 // using the idea of Graham's scan
                 // to make the triangulation "convex" (!)
                 
@@ -57,23 +59,6 @@ public class PolygonTriangulation {
                 
                 S.push(points.get(i));
             }
-            
-            /*if (i < points.size()-2) {
-                if (lastNotConvex < 0) {
-                    if (isRightTurn(points.get(i), points.get(i+1), points.get(i+2))) {
-                        // Not Convex! Additional triangles needed
-                        result.add(new Triangle(points.get(i), points.get(i+1), points.get(i+2)));
-                        lastNotConvex = i;
-                    }
-                } else{
-                    if (isRightTurn(points.get(lastNotConvex), points.get(i+1), points.get(i+2))) {
-                        // Not Convex! Additional triangles needed
-                        result.add(new Triangle(points.get(lastNotConvex), points.get(i+1), points.get(i+2)));
-                    } else {
-                        lastNotConvex = -1;
-                    }
-                }
-            }*/
         }
         
         return result;

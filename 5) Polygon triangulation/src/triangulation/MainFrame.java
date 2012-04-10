@@ -32,14 +32,7 @@ public class MainFrame extends javax.swing.JFrame {
             public void paintComponent(Graphics g) {
 
                 g.clearRect(0, 0, this.getWidth(), this.getHeight());
-                g.setColor(Color.BLACK);
-
-                for (int i = 0; i < polygon.size(); i++) {
-                    g.fillOval((int)polygon.get(i).getX() - 3,
-                        (int)(getHeight() - polygon.get(i).getY() - 3), 5, 5);
-                    g.drawLine((int)polygon.get(i).getX(), (int)(getHeight() - polygon.get(i).getY()),
-                        (int)polygon.get((i+1) % polygon.size()).getX(), (int)(getHeight() - polygon.get((i+1) % polygon.size()).getY()));
-                }
+                g.setColor(Color.GRAY);
 
                 if (state == 1) { // Рисуем триангуляцию
                     for (Triangle t : triangulation) {
@@ -50,6 +43,15 @@ public class MainFrame extends javax.swing.JFrame {
                         g.drawLine((int)t.getA().getX(), (int)(getHeight() - t.getA().getY()),
                             (int)t.getC().getX(), (int)(getHeight() - t.getC().getY()));
                     }
+                }
+
+                g.setColor(Color.BLACK);
+
+                for (int i = 0; i < polygon.size(); i++) {
+                    g.fillOval((int)polygon.get(i).getX() - 3,
+                        (int)(getHeight() - polygon.get(i).getY() - 3), 5, 5);
+                    g.drawLine((int)polygon.get(i).getX(), (int)(getHeight() - polygon.get(i).getY()),
+                        (int)polygon.get((i+1) % polygon.size()).getX(), (int)(getHeight() - polygon.get((i+1) % polygon.size()).getY()));
                 }
             }
         };
