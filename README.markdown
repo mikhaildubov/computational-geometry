@@ -8,12 +8,12 @@ The project contains both implementations and visualization tools for basic comp
 
 ### __Two segments intersection__
 <table border = "0" width = "100%">
-<td valign = "top">
+<td valign = "top" width = "50%">
 <ul>
  <li>Algorithm using the cross product - <b><em>O(1)</em></b>
 </ul>
 </td>
-<td align = "right">
+<td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i630/1204/d0/32c46068cad0.png"/>
 </td>
 </table><br>
