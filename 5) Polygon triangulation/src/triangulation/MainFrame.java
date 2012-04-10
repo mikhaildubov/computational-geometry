@@ -130,6 +130,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         jButton5.setText("By Monotone partitioning - O(n∙log(n))");
+        jButton5.setEnabled(false);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
