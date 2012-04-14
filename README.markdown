@@ -96,11 +96,11 @@ The project contains both implementations and visualization tools for basic comp
 </table><br><br><br>
 
 ## Reference books:
-<img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg"/> &nbsp;
-<img src = "http://www.cs.uu.nl/geobook/cover3small.jpg"/> &nbsp;
-<img src = "http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg"/> &nbsp;
-<img src = "http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg"/> &nbsp;
-<img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg"/> &nbsp;
+<img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg" hspace = "5"/>
+<img src = "http://www.cs.uu.nl/geobook/cover3small.jpg" hspace = "5"/>
+<img src = "http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg" hspace = "5"/>
+<img src = "http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg" hspace = "5"/>
+<img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg" hspace = "5"/>
 
 * __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
 * __"Computational Geometry: Algorithms and Applications"__ by Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars
