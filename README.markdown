@@ -96,11 +96,11 @@ The project contains both implementations and visualization tools for basic comp
 </table><br><br><br>
 
 ## Reference books:
-![CLRS](http://websupport1.citytech.cuny.edu/faculty/dkahrobaei/MAT2540_files/image004.jpg "Introduction to algorithms. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein")&nbsp;&nbsp;
-![deBerg](http://www.cs.uu.nl/geobook/cover3small.jpg "Computational Geometry: Algorithms and applications. Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars")&nbsp;&nbsp;
-![Skiena](http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg "The Algorithm Design Manual. Steven S. Skiena")&nbsp;&nbsp;
-![SkienaRevilla](http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg "Programming Challenges. Steven S. Skiena, Miguel Revilla")&nbsp;&nbsp;
-![Knuth](http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg "Axioms and Hulls. Donald E. Knuth")&nbsp;&nbsp;
+![CLRS](http://s12.radikal.ru/i185/1204/a1/0b85e0d5c314.png "Introduction to algorithms. Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein")&nbsp;
+![deBerg](http://www.cs.uu.nl/geobook/cover3small.jpg "Computational Geometry: Algorithms and applications. Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars")&nbsp;
+![Skiena](http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg "The Algorithm Design Manual. Steven S. Skiena")&nbsp;
+![SkienaRevilla](http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg "Programming Challenges. Steven S. Skiena, Miguel Revilla")&nbsp;
+![Knuth](http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg "Axioms and Hulls. Donald E. Knuth")&nbsp;
 
 * __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
 * __"Computational Geometry: Algorithms and Applications"__ by Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars
