@@ -111,8 +111,8 @@ The project contains both implementations and visualization tools for basic comp
 <table border = "0" width = "100%">
 <td align = "center" valign = "bottom" width = "20%"><img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg" hspace = "5"/></td>
 <td align = "center" valign = "bottom" width = "20%"><img src = "http://www.cs.uu.nl/geobook/cover3small.jpg" hspace = "5"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg" hspace = "5"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg" hspace = "5"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://img138.imageshack.us/img138/3826/thealgorithmdesignmanua.jpg" hspace = "5"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.programming-challenges.com/images/booksacover.gif" hspace = "5"/></td>
 <td align = "center" valign = "bottom" width = "20%"><img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg" hspace = "5"/></td>
 </table>
 
