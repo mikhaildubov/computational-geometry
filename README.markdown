@@ -73,6 +73,7 @@ The project contains both implementations and visualization tools for basic comp
 
 ### __Point set Delaunay triangulation__
 <table border = "0" width = "100%">
+<tr>
 <td valign = "top" width = "50%">
 <ul>
  <li>Brute force "Edge flipping" algorithm
@@ -81,6 +82,17 @@ The project contains both implementations and visualization tools for basic comp
 <td align = "right" width = "50%">
 <img src = "http://i080.radikal.ru/1204/5a/ea82371dc55e.png"/>
 </td>
+</tr>
+<tr>
+<td valign = "top" width = "50%">
+<ul>
+ <li>Terrain construction in VRML
+</ul>
+</td>
+<td align = "right" width = "50%">
+<img src = "http://s55.radikal.ru/i149/1204/e0/ef4d84184556.png"/>
+</td>
+</tr>
 </table><br>
 
 ### __Halfplanes intersection__

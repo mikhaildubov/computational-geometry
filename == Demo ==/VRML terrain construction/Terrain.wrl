@@ -1,0 +1,46 @@
+#VRML V2.0 utf8
+
+DEF Direct01 DirectionalLight
+{
+    direction .642 -.514 -.569
+}
+	
+DEF	terrain IndexedFaceSet
+{
+	solid FALSE                        # Each triangle will have two faces
+	
+	coord DEF facePoints Coordinate
+	{
+		#point []
+	}
+
+	#coordIndex []
+}
+	
+DEF	terrainLines IndexedLineSet
+{
+	coord DEF linePoints Coordinate
+	{
+		#point []
+	}
+
+	#coordIndex []
+}
+
+
+
+DEF script Script
+{
+  directOutput TRUE
+  mustEvaluate TRUE
+
+  eventOut MFVec3f point_changed       # fields with "USE" can be used here alternatively
+  eventOut MFInt32 coordIndex_changed  # fields with "USE" can be used here alternatively
+
+  url "VRMLTerrainScript.class"
+}
+
+ROUTE script.point_changed TO facePoints.set_point
+ROUTE script.point_changed TO linePoints.set_point
+ROUTE script.coordIndex_changed TO terrain.set_coordIndex
+ROUTE script.coordIndex_changed TO terrainLines.set_coordIndex
