@@ -8,12 +8,10 @@ import ru.hse.se.primitives.Point;
 import ru.hse.se.primitives.Triangle;
 
 
-public class PolygonTriangulation {
-    
-    
+public class PointsTriangulation {
     
     /**
-     * Computes some [bad] polygon triangulation to be used
+     * Computes some [bad] points triangulation to be used
      * in the brute force edge flipping algorithm.
      */
     public static ArrayList<Triangle> some(ArrayList<Point> points) {
@@ -30,13 +28,21 @@ public class PolygonTriangulation {
         S.push(points.get(0));
         
         Point top, nextToTop;
+        Triangle lastAdded = null, temp = null,
+                 lastAddedInStack = null, tempInStack = null;
         
         for (int i = 0; i < points.size(); i++) {
             
             if (i < points.size() - 1) {
                 
-                // Adding new "narrow" triangle with p0 as one of its vertices                
-                result.add(new Triangle(p0, points.get(i), points.get(i+1)));
+                // Adding new "narrow" triangle with p0 as one of its vertices
+                temp = new Triangle(p0, points.get(i), points.get(i+1));
+                
+                 // Linking the triangles (!)
+                temp.link(lastAdded);
+                
+                result.add(temp);
+                lastAdded = temp;
             }
             
             if (i > 0) {
@@ -49,7 +55,22 @@ public class PolygonTriangulation {
                 
                 while (isRightTurn(nextToTop, top, points.get(i))) {
                     
-                    result.add(new Triangle(nextToTop, top, points.get(i)));
+                    tempInStack = new Triangle(nextToTop, top, points.get(i));
+                    
+                    // Linking the triangles (!)
+                    tempInStack.link(lastAddedInStack);
+                    int k = 0;
+                    for (int j = result.size()-1; j >= 0; j--) {
+                        if (tempInStack.link(result.get(j))) {
+                            k++;
+                        }
+                        if (k == 2) {
+                            break;
+                        }
+                    }
+                    
+                    result.add(tempInStack);
+                    lastAddedInStack = tempInStack;
                     
                     S.pop();
                     
