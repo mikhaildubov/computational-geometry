@@ -1,12 +1,12 @@
-# Computational geometry in Java
+<h1>Computational geometry in Java</h1>
 
 The project contains both implementations and visualization tools for basic computational geometry algorithms in two-dimensional space. These algorithms are implemented in Java programming language and are visualized using the Swing libraries. This is a NetBeans 7.0.1 project. <br><br>
 
-## List of implemented algorithms:
+<h2>List of implemented algorithms:</h2>
 
 
 
-### __Two segments intersection__
+<h3>Two segments intersection</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -18,7 +18,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Any segments intersection__
+<h3>Any segments intersection</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -31,7 +31,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Convex hull construction__
+<h3>Convex hull construction</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -44,7 +44,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Closest points pair__
+<h3>Closest points pair</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -57,7 +57,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Polygon triangulation__
+<h3>Polygon triangulation</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -71,7 +71,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-### __Point set Delaunay triangulation__
+<h3>Point set Delaunay triangulation</h3>
 <table border = "0" width = "100%">
 <tr>
 <td valign = "top" width = "50%">
@@ -95,7 +95,7 @@ The project contains both implementations and visualization tools for basic comp
 </tr>
 </table><br>
 
-### __Halfplanes intersection__
+<h3>Halfplanes intersection</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
@@ -107,7 +107,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br><br><br>
 
-## Reference books:
+<h2>Reference books:</h2>
 <table border = "0" width = "100%">
 <td valign = "bottom" width = "20%"><img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg" hspace = "5"/></td>
 <td valign = "bottom" width = "20%"><img src = "http://www.cs.uu.nl/geobook/cover3small.jpg" hspace = "5"/></td>
