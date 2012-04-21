@@ -1,8 +1,21 @@
 package ru.hse.se.primitives;
 
-
+/**
+ * Represents a triangle.
+ * Supports links to the adjacent triangles
+ * (useful for triangulations).
+ * 
+ * @author Mikhail Dubov
+ */
 public class Triangle {
     
+    /**
+     * Initializes a triangle by its vertices.
+     * 
+     * @param A The first vertex
+     * @param B The second vertex
+     * @param C The third vertex
+     */
     public Triangle (Point A, Point B, Point C) {
         a = A;
         b = B;
@@ -26,6 +39,12 @@ public class Triangle {
         }
     }
     
+    /**
+     * Determines whether a point lies inside the triangle.
+     * 
+     * @param p The point
+     * @return true, whether the point lies inside the triangle, false otherwise
+     */
     public boolean pointInside(Point p) {
         
         boolean l1 = Point.isLeftTurn(a, b, p);
@@ -47,18 +66,40 @@ public class Triangle {
         return false;
     }
     
+    /**
+     * Returns the 'A' vertex of the triangle ABC.
+     * 
+     * @return The vertex
+     */
     public Point getA() {
         return a;
     }
     
+    /**
+     * Returns the 'B' vertex of the triangle ABC.
+     * 
+     * @return The vertex
+     */
     public Point getB() {
         return b;
     }
     
+    /**
+     * Returns the 'C' vertex of the triangle ABC.
+     * 
+     * @return The vertex
+     */
     public Point getC() {
         return c;
     }
     
+    /**
+     * Returns the ith vertex of the triangle ABC,
+     * where 'A' is the 0-th vertex, 'B' - the first and 'C' - the second.
+     * 
+     * @param i The index
+     * @return The vertex
+     */
     public Point getIth(int i) {
         switch (i) {
             case 0: return a; 
@@ -77,6 +118,13 @@ public class Triangle {
         }
     }
     
+    /**
+     * Updates the links to adjacent triangles given another triangle.
+     * The links in both triangles are updated.
+     * 
+     * @param t Another triangle
+     * @return true, if the triangle is adjacent, false otherwise
+     */
     public boolean link(Triangle t) {
         
         if (t == null) {
@@ -122,6 +170,12 @@ public class Triangle {
         }
     }*/
     
+    /**
+     * Returns an adjacent triangle.
+     * 
+     * @param s The side where the adjacent triangle lies
+     * @return The adjacent triangle, null if there is no triangle
+     */
     public Triangle getAdjacent(Side s) {
         switch (s) {
             case AB: return adjAB;
@@ -131,6 +185,14 @@ public class Triangle {
         }
     }
     
+    /**
+     * Determines whether the given triangle
+     * is adjacent for the given side.
+     * 
+     * @param t The triangle
+     * @param s The side
+     * @return true, if the triangle is adjacent, false otherwise
+     */
     public boolean isAdjacent(Triangle t, Side s) {
         return this.getAdjacent(s) == t;
     }
@@ -147,6 +209,10 @@ public class Triangle {
     /**
      * Flips the common edge of the two triangles.
      * Assumes that the adjacend sides are given correctly.
+     * 
+     * @param s1 The side of the current triangle to be flipped
+     * @param t2 The adjacent triangle
+     * @param s2 The side of the adjacent triangle to be flipped
      */
     public void flipEdge(Side s1, Triangle t2, Side s2) {
         
@@ -209,6 +275,11 @@ public class Triangle {
      * Assumes that the adjacend sides are given correctly.
      * 
      * (see [deBerg] (chapter 9) for details)
+     * 
+     * @param s1 The side of the current triangle to be checked for illegality
+     * @param t2 The adjacent triangle
+     * @param s2 The side of the adjacent triangle to be checked for illegality
+     * @return true, if the edge is "illegal", false otherwise
      */
     public boolean areIllegal(Side s1, Triangle t2, Side s2) {
         
@@ -218,10 +289,13 @@ public class Triangle {
             return false;
         }
             
-        Circle c = new Circle(this.getA(), this.getB(), this.getC());
-        return c.isInside(t2.getIth((s2.ordinal()+2) % 3));
+        Circle cr = new Circle(this.getA(), this.getB(), this.getC());
+        return cr.isInside(t2.getIth((s2.ordinal()+2) % 3));
     }
     
+    /**
+     * The enum for the triangle sides.
+     */
     public enum Side {
         AB(0), BC(1), AC(2);
         
@@ -229,6 +303,14 @@ public class Triangle {
             this.i = i;
         }
         
+        /**
+         * Returns the triangle side for its index,
+         * where AB is the 0-th side,
+         * BC - the first and AC the third.
+         * 
+         * @param i The index
+         * @return The side or null, if the index is not correct
+         */
         public static Side valueOf(int i) {
             switch(i) {
                 case 0: return AB;
@@ -241,7 +323,11 @@ public class Triangle {
         int i;
     }
     
+    /** The vertices **/
     protected Point a, b, c;
+    
+    /** The pointers to adjacent triangles **/
     protected Triangle adjAB, adjBC, adjAC;
+    
     //protected boolean tagAB, tagBC, tagAC;
 }

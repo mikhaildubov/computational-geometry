@@ -1,8 +1,18 @@
 package ru.hse.se.primitives;
 
-
+/**
+ * Represents a segment.
+ * 
+ * @author Mikhail Dubov
+ */
 public class Segment {
     
+    /**
+     * Initializes a segment by its vertices.
+     * 
+     * @param left The left vertex
+     * @param right The right vertex
+     */
     public Segment(Point left, Point right) {
         
         if(left.getX() > right.getX()) {
@@ -18,10 +28,20 @@ public class Segment {
         this.right = right;
     }
     
+    /**
+     * Returns the left vertex of the segment.
+     * 
+     * @return The left vertex
+     */
     public Point getLeft() {
         return left;
     }
     
+    /**
+     * Returns the right vertex of the segment.
+     * 
+     * @return The right vertex
+     */
     public Point getRight() {
         return right;
     }

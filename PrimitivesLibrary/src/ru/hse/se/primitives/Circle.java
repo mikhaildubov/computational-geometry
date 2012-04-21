@@ -9,6 +9,9 @@ public class Circle {
     
     /**
      * Initializes a circle by its center and radius.
+     * 
+     * @param center The center of the circle
+     * @param radius The radius of the circle, must be positive
      */
     public Circle(Point center, double radius) {
         this.center = center;
@@ -16,8 +19,12 @@ public class Circle {
     }
     
     /**
-     * Initializes a circle by three points
-     * lying on its boundary.
+     * Initializes a circle by three different
+     * points lying on its boundary.
+     * 
+     * @param a A point that lies on the circle boundary
+     * @param b A point that lies on the circle boundary
+     * @param c A point that lies on the circle boundary
      */
     public Circle(Point a, Point b, Point c) {
         Line l1 = new Line(2*a.getX() - 2*b.getX(),
@@ -34,19 +41,40 @@ public class Circle {
         radius = center.dist(a);
     }
     
-    
+    /**
+     * Returns the circle center.
+     * 
+     * @return The center point
+     */
     public Point getCenter() {
         return center;
     }
     
+    /**
+     * Returns the circle radius.
+     * 
+     * @return The radius
+     */
     public double getRadius() {
         return radius;
     }
     
+    /**
+     * Determines whether the given point lies inside the circle.
+     * 
+     * @param p The point
+     * @return true, if the point is inside, false otherwise
+     */
     public boolean isInside(Point p) {
         return center.dist(p) < radius;
     }
     
+    /**
+     * Determines whether the given point lies outside the circle.
+     * 
+     * @param p The point
+     * @return true, if the point is outside, false otherwise
+     */
     public boolean isOutside(Point p) {
         return center.dist(p) > radius;
     }
