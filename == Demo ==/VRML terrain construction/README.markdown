@@ -1,6 +1,6 @@
 ## VRML Terrain construction
 
-This demo visualizes the construction of a 3D terrain using the Delaunay triangulation of the point projections onto the two dimensional plane. As the tool of visulatization, <a href="http://www.web3d.org/x3d/specifications/vrml/">VRML</a> is used.
+This demo visualizes the construction of a 3D terrain using the Delaunay triangulation of point projections onto the two dimensional plane. As the tool of visulatization, <a href="http://www.web3d.org/x3d/specifications/vrml/">VRML</a> is used.
 
 ## Required software
 

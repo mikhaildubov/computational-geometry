@@ -108,11 +108,13 @@ The project contains both implementations and visualization tools for basic comp
 </table><br><br><br>
 
 ## Reference books:
-<img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg" hspace = "5"/>
-<img src = "http://www.cs.uu.nl/geobook/cover3small.jpg" hspace = "5"/>
-<img src = "http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg" hspace = "5"/>
-<img src = "http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg" hspace = "5"/>
-<img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg" hspace = "5"/>
+<table border = "0" width = "100%">
+<td valign = "bottom" width = "20%"><img src = "http://highered.mcgraw-hill.com/sites/dl/free/0070131511/cover/cormen-lg_cover.jpg" hspace = "5"/></td>
+<td valign = "bottom" width = "20%"><img src = "http://www.cs.uu.nl/geobook/cover3small.jpg" hspace = "5"/></td>
+<td valign = "bottom" width = "20%"><img src = "http://www.cs.sunysb.edu/~algorith/images/cover-new.jpg" hspace = "5"/></td>
+<td valign = "bottom" width = "20%"><img src = "http://www.cs.sunysb.edu/~algorith/video-lectures/cover2.jpg" hspace = "5"/></td>
+<td valign = "bottom" width = "20%"><img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg" hspace = "5"/></td>
+</table>
 
 * __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
 * __"Computational Geometry: Algorithms and Applications"__ by Mark de Berg, Otfried Cheong, Marc van Kreveld and Mark Overmars
