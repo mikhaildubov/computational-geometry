@@ -109,11 +109,11 @@ The project contains both implementations and visualization tools for basic comp
 
 <h2>Reference books:</h2>
 <table border = "0" width = "100%">
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i630/1204/8a/1d30363f4c91.jpg" hspace = "2"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.flazx.us/covers/large-3540779736.jpg" hspace = "2"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://img138.imageshack.us/img138/3826/thealgorithmdesignmanua.jpg" hspace = "2"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.programming-challenges.com/images/booksacover.gif" hspace = "2"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg" hspace = "2"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i630/1204/8a/1d30363f4c91.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.flazx.us/covers/large-3540779736.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://img138.imageshack.us/img138/3826/thealgorithmdesignmanua.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.programming-challenges.com/images/booksacover.gif"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg"/></td>
 </table>
 
 * __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
