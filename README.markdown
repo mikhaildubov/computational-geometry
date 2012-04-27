@@ -90,7 +90,7 @@ The project contains both implementations and visualization tools for basic comp
 </ul>
 </td>
 <td align = "right" width = "50%">
-<img src = "http://s55.radikal.ru/i149/1204/e0/ef4d84184556.png"/>
+<img src = "http://s58.radikal.ru/i160/1204/96/217993ca4cbd.jpg"/>
 </td>
 </tr>
 </table><br>
@@ -109,11 +109,11 @@ The project contains both implementations and visualization tools for basic comp
 
 <h2>Reference books:</h2>
 <table border = "0" width = "100%">
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i630/1204/8a/1d30363f4c91.jpg"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.flazx.us/covers/large-3540779736.jpg"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://img138.imageshack.us/img138/3826/thealgorithmdesignmanua.jpg"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.programming-challenges.com/images/booksacover.gif"/></td>
-<td align = "center" valign = "bottom" width = "20%"><img src = "http://www.g.dk/images/ml/9783540/9783540556114_ml.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i609/1204/24/afb4964e38ad.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i603/1204/e1/5cf25625ecf9.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s006.radikal.ru/i214/1204/98/0369cc3394c5.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i616/1204/b7/1efa57c26710.jpg"/></td>
+<td align = "center" valign = "bottom" width = "20%"><img src = "http://s019.radikal.ru/i642/1204/b5/6dd87557c44d.jpg"/></td>
 </table>
 
 * __"Introduction to Algorithms"__ by Thomas H. Cormen, Charles E. Leiserson, Ronald L. Rivest and Clifford Stein
