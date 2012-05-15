@@ -51,6 +51,35 @@ public class Halfplane {
         return ! rightSide;
     }
     
+    
+    
+    /**
+     * Determines whether the point lies
+     * in the halfplane.
+     * 
+     * @param p The point
+     * @return true, if the point lies in the left halfplane, false otherwise
+     */
+    public boolean includes(Point p) {
+        
+        if (isLeftBoundary()) {
+            
+            if (line.isHorizontal()) { // == upper boundary
+                return (p.getY() < line.YforX(0));
+            } else {
+                return (p.getX() > line.XforY(p.getY()));
+            }
+            
+        } else {
+            
+            if (line.isHorizontal()) { // == lower boundary
+                return (p.getY() > line.YforX(0));
+            } else {
+                return (p.getX() < line.XforY(p.getY()));
+            }
+        }
+    }
+    
     private Line line;
     private boolean rightSide;
 }

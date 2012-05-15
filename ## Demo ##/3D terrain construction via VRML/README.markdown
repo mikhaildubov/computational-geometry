@@ -8,7 +8,7 @@ To play the demo, you need to have a VRML player. The player can be installed ei
 
 ## Important notes
 
-<em><b>NB:</b> Worked for me correctly for some reason (Instant reality is not a stable tool yet) only after placing the folder to the root of disk C.</em>
+<em><b>NB:</b> There should be only latin letters in the path to this folder.</em>
 
 ## Illustrations
 

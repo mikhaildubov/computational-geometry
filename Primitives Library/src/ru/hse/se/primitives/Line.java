@@ -102,7 +102,7 @@ public class Line {
      * @return true, if the line is ascending, false otherwise
      */
     public boolean isAscending() {
-        return (b == 0 || (-a/b) > 0);
+        return (b == 0 || (-a/b) >= 0);
     }
     
     /**
@@ -208,6 +208,11 @@ public class Line {
                 }
             }
         }
+    }
+    
+    @Override
+    public String toString() {
+        return a + "*x + " + b + "*y + " + c + " = 0";
     }
     
     private double a, b, c;

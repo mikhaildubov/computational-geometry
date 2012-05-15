@@ -18,6 +18,11 @@ public class HalfplaneIntersection {
     public static Polygon intersectHalfplanes_Naive
                             (ArrayList<Halfplane> halfplanes) {
         
+        // Processes vertical/horizontal halfplanes in a special way
+        
+        halfplanes = processVerticalAndHorizontal(halfplanes);
+        
+        
         // Separating the halfplanes into the left
         // and into the right ones (O(n))
         
@@ -55,16 +60,18 @@ public class HalfplaneIntersection {
             
             // 1. One of boundary angles => add
             if (insertPos == 0) {
-                while(convLeft.size() > 1 && h.getLine().isLeftPoint (Line.intersection(
-                        convLeft.get(0).getLine(),
-                        convLeft.get(1).getLine()))) {
+                while(convLeft.size() > 1 &&
+                        ! h.includes (Line.intersection(
+                          convLeft.get(0).getLine(),
+                          convLeft.get(1).getLine()))) {
                     convLeft.remove(0);
                 }
                 convLeft.add(insertPos, h);
             } else if (insertPos == convLeft.size()) {
-                while(convLeft.size() > 1 && h.getLine().isLeftPoint (Line.intersection(
-                        convLeft.get(convLeft.size()-1).getLine(),
-                        convLeft.get(convLeft.size()-2).getLine()))) {
+                while(convLeft.size() > 1 &&
+                        ! h.includes (Line.intersection(
+                          convLeft.get(convLeft.size()-1).getLine(),
+                          convLeft.get(convLeft.size()-2).getLine()))) {
                     convLeft.remove(convLeft.size()-1);
                     insertPos--;
                 }
@@ -81,18 +88,18 @@ public class HalfplaneIntersection {
                 while (i < convLeft.size() - 1) {
                     intersection1 = intersection2 = false;
                     
-                    if (h.getLine().isLeftPoint (Line.intersection(
-                        convLeft.get(i).getLine(),
-                        convLeft.get(i+1).getLine()))) {
+                    if (! h.includes (Line.intersection(
+                          convLeft.get(i).getLine(),
+                          convLeft.get(i+1).getLine()))) {
                         
                         vertices ++;
                         intersection1 = true;
                     }
                     
                     if (i < convLeft.size() - 2 &&
-                        h.getLine().isLeftPoint (Line.intersection(
-                        convLeft.get(i+1).getLine(),
-                        convLeft.get(i+2).getLine()))) {
+                        ! h.includes (Line.intersection(
+                          convLeft.get(i+1).getLine(),
+                          convLeft.get(i+2).getLine()))) {
                         
                         vertices ++;
                         intersection2 = true;
@@ -133,16 +140,18 @@ public class HalfplaneIntersection {
             
             // 1. One of boundary angles => add
             if (insertPos == 0) {
-                while(convRight.size() > 1 && h.getLine().isRightPoint (Line.intersection(
-                        convRight.get(0).getLine(),
-                        convRight.get(1).getLine()))) {
+                while(convRight.size() > 1 &&
+                        ! h.includes (Line.intersection(
+                          convRight.get(0).getLine(),
+                          convRight.get(1).getLine()))) {
                     convRight.remove(0);
                 }
                 convRight.add(insertPos, h);
             } else if (insertPos == convRight.size()) {
-                while(convRight.size() > 1 && h.getLine().isRightPoint (Line.intersection(
-                        convRight.get(convRight.size()-1).getLine(),
-                        convRight.get(convRight.size()-2).getLine()))) {
+                while(convRight.size() > 1 &&
+                        ! h.includes (Line.intersection(
+                          convRight.get(convRight.size()-1).getLine(),
+                          convRight.get(convRight.size()-2).getLine()))) {
                     convRight.remove(convRight.size()-1);
                     insertPos--;
                 }
@@ -159,18 +168,18 @@ public class HalfplaneIntersection {
                 while (i < convRight.size() - 1) {
                     intersection1 = intersection2 = false;
                     
-                    if (h.getLine().isRightPoint (Line.intersection(
-                        convRight.get(i).getLine(),
-                        convRight.get(i+1).getLine()))) {
+                    if (! h.includes (Line.intersection(
+                          convRight.get(i).getLine(),
+                          convRight.get(i+1).getLine()))) {
                         
                         vertices ++;
                         intersection1 = true;
                     }
                     
                     if (i < convRight.size() - 2 &&
-                        h.getLine().isRightPoint (Line.intersection(
-                        convRight.get(i+1).getLine(),
-                        convRight.get(i+2).getLine()))) {
+                        ! h.includes (Line.intersection(
+                          convRight.get(i+1).getLine(),
+                          convRight.get(i+2).getLine()))) {
                         
                         vertices ++;
                         intersection2 = true;
@@ -204,25 +213,25 @@ public class HalfplaneIntersection {
         for (int i = 0; i < convLeft.size(); i++) {
             for (int j = 0; j < convRight.size(); j++) {
                 
-                if (((j == 0) || convLeft.get(i).getLine().isLeftPoint
+                if (((j == 0) || ! convLeft.get(i).includes
                         (Line.intersection(convRight.get(j-1).getLine(), convRight.get(j).getLine()))) &&
-                    ((j == convRight.size()-1) || convLeft.get(i).getLine().isRightPoint
+                    ((j == convRight.size()-1) || convLeft.get(i).includes
                         (Line.intersection(convRight.get(j).getLine(), convRight.get(j+1).getLine()))) &&
-                    ((i == 0) || convRight.get(j).getLine().isRightPoint
+                    ((i == 0) || ! convRight.get(j).includes
                         (Line.intersection(convLeft.get(i-1).getLine(), convLeft.get(i).getLine()))) &&
-                    ((i == convLeft.size()-1) || convRight.get(j).getLine().isLeftPoint
+                    ((i == convLeft.size()-1) || convRight.get(j).includes
                         (Line.intersection(convLeft.get(i).getLine(), convLeft.get(i+1).getLine())))) {
                     
                     startLeft = i;
                     startRight = j;
                     
-                } else if (((j == 0) || convLeft.get(i).getLine().isRightPoint
+                } else if (((j == 0) || convLeft.get(i).includes
                         (Line.intersection(convRight.get(j-1).getLine(), convRight.get(j).getLine()))) &&
-                    ((j == convRight.size()-1) || convLeft.get(i).getLine().isLeftPoint
+                    ((j == convRight.size()-1) || ! convLeft.get(i).includes
                         (Line.intersection(convRight.get(j).getLine(), convRight.get(j+1).getLine()))) &&
-                    ((i == 0) || convRight.get(j).getLine().isLeftPoint
+                    ((i == 0) || convRight.get(j).includes
                         (Line.intersection(convLeft.get(i-1).getLine(), convLeft.get(i).getLine()))) &&
-                    ((i == convLeft.size()-1) || convRight.get(j).getLine().isRightPoint
+                    ((i == convLeft.size()-1) || ! convRight.get(j).includes
                         (Line.intersection(convLeft.get(i).getLine(), convLeft.get(i+1).getLine())))) {
                     
                     endLeft = i;
@@ -240,7 +249,7 @@ public class HalfplaneIntersection {
         
         Polygon res = createPolygonFromHalfplaneChains(resLeft, resRight);
         
-        return res;        
+        return res;
     }
     
     /**
@@ -301,6 +310,15 @@ public class HalfplaneIntersection {
         return c;
     }*/
     
+    /**
+     * Constructs a polygon from the left and the right chain.
+     * There should be no "dead" halfplanes
+     * (halfplanes that are above/below bounding poins).
+     *  
+     * @param left Left chain
+     * @param right Right chain
+     * @return Resulting polygon
+     */
     private static Polygon createPolygonFromHalfplaneChains
                     (ArrayList<Halfplane> left, ArrayList<Halfplane> right) {
         
@@ -328,7 +346,7 @@ public class HalfplaneIntersection {
                 }
             }
             System.out.println(bottom + " - "+lowestExistent);
-            if (! bottom.isNaP() && bottom.getY() < lowestExistent.getY()) {
+            if (! bottom.isNaP() && bottom.getY() <= lowestExistent.getY()) {
                 res.add(bottom);
             }
         }
@@ -356,11 +374,59 @@ public class HalfplaneIntersection {
                 }
             }
             System.out.println(upper + " - "+highestExistent);
-            if (! upper.isNaP() && upper.getY() > highestExistent.getY()) {
+            if (! upper.isNaP() && upper.getY() >= highestExistent.getY()) {
                 res.add(upper);
             }
         }
         return res;
+    }
+    
+    private static ArrayList<Halfplane> processVerticalAndHorizontal
+                                            (ArrayList<Halfplane> halfplanes) {
+        
+        ArrayList<Halfplane> result = new ArrayList<Halfplane>();
+        
+        // After the processing there remain only
+        // the most-right left vertical line,
+        // the most-bottom upper horizontal line etc.
+        
+        Halfplane leftVert = null,
+                  rightVert = null,
+                  upperHor = null,
+                  lowerHor = null;
+        
+        for (Halfplane h : halfplanes) {
+            if (h.isLeftBoundary() && h.getLine().isVertical()) {
+                if (leftVert == null ||
+                    h.getLine().XforY(0) > leftVert.getLine().XforY(0)) {
+                    leftVert = h;
+                }
+            } else if (h.isRightBoundary() && h.getLine().isVertical()) {
+                if (rightVert == null ||
+                    h.getLine().XforY(0) < rightVert.getLine().XforY(0)) {
+                    rightVert = h;
+                }
+            } else if (h.isLeftBoundary() && h.getLine().isHorizontal()) { // left == upper!
+                if (upperHor == null ||
+                    h.getLine().YforX(0) < upperHor.getLine().YforX(0)) {
+                    upperHor = h;
+                }
+            } else if (h.isRightBoundary() && h.getLine().isHorizontal()) { // right == lower!
+                if (lowerHor == null ||
+                    h.getLine().YforX(0) > lowerHor.getLine().YforX(0)) {
+                    lowerHor = h;
+                }
+            } else {
+                result.add(h);
+            }
+        }
+        
+        if (leftVert != null) result.add(leftVert);
+        if (rightVert != null) result.add(rightVert);
+        if (upperHor != null) result.add(upperHor);
+        if (lowerHor != null) result.add(lowerHor);
+        
+        return result;
     }
     
     private static double crossProduct(Point p0, Point p1, Point p2) {

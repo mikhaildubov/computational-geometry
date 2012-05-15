@@ -34,10 +34,21 @@ public class MainFrame extends javax.swing.JFrame {
 
                 g.clearRect(0, 0, this.getWidth(), this.getHeight());
 
-                int x1 = 0, x2 = this.getWidth(), y1, y2;
+                int x1, x2, y1, y2;
+
                 for(Halfplane h : halfplanes) {
-                    y1 = (int)h.getLine().YforX(x1);
-                    y2 = (int)h.getLine().YforX(x2);
+
+                    if (h.getLine().isVertical()) {
+                        y1 = 0;
+                        y2 = this.getHeight();
+                        x1 = (int)h.getLine().XforY(y1);
+                        x2 = (int)h.getLine().XforY(y2);
+                    } else {
+                        x1 = 0;
+                        x2 = this.getWidth();
+                        y1 = (int)h.getLine().YforX(x1);
+                        y2 = (int)h.getLine().YforX(x2);
+                    }
 
                     g.setColor(Color.BLACK);
                     g.drawLine(x1, this.getHeight() - y1,
@@ -46,216 +57,236 @@ public class MainFrame extends javax.swing.JFrame {
                     g.setColor(Color.LIGHT_GRAY);
                     int m = h.isLeftBoundary() ? 1 : -1;
                     int n = m * (h.getLine().isAscending() ? 1 : -1);
-                    if (Math.abs(h.getLine().YforX(0) -
-                        h.getLine().YforX(1)) < 1) {
-                    m = 0;
-                } else {
-                    n = 0;
-                }
+                    if (! h.getLine().isVertical() &&
+                        Math.abs(h.getLine().YforX(0) -
+                            h.getLine().YforX(1)) < 1) {
+                        m = 0;
+                    } else {
+                        n = 0;
+                    }
 
-                for (int j = 1; j <= 6; j++) {
-                    g.drawLine(x1+j*m, this.getHeight()-y1+j*n,
-                        x2+j*m, this.getHeight()-y2+j*n);
-                }
-            }
-
-            if (state == 1) { // Текущая полуплоскость
-                g.setColor(Color.BLACK);
-                g.drawLine((int)pStart.getX(),
-                    this.getHeight() - (int)pStart.getY(),
-                    (int)mouseX,
-                    (int)mouseY);
-
-                g.setColor(Color.LIGHT_GRAY);
-                int m = (this.getHeight() - pStart.getY() > mouseY) ? 1 : -1;
-                int n = (pStart.getX() > mouseX) ? -1 : 1;
-                if (Math.abs(this.getHeight() - pStart.getY() - mouseY) >
-                    Math.abs(pStart.getX() - mouseX)) {
-                    n = 0;
-                } else {
-                    m = 0;
-                }
-                for (int j = 1; j <= 6; j++) {
-                    g.drawLine((int)pStart.getX()+j*m,
-                        this.getHeight()-(int)pStart.getY()+j*n,
-                        (int)mouseX+j*m,
-                        (int)mouseY+j*n);
-                }
-            }
-
-            if (state == 2) { // Рисуем пересечение
-
-                g.setColor(Color.RED);
-
-                Point cur, next;
-                for(int i = 0; i < intersection.size(); i++) {
-                    cur = intersection.get(i);
-                    next = intersection.get((i + 1) % intersection.size());
-                    for (int j = 1; j <= 4; j++) {
-                        g.drawLine((int)cur.getX()+((j+1)/2), (int)(getHeight()-cur.getY()+(j/2)),
-                            (int)next.getX()+((j+1)/2), (int)(getHeight()-next.getY()+(j/2)));
+                    for (int j = 1; j <= 6; j++) {
+                        g.drawLine(x1+j*m, this.getHeight()-y1+j*n,
+                            x2+j*m, this.getHeight()-y2+j*n);
                     }
                 }
 
-                /*g.setColor(Color.GREEN);
-                for(int i = 0; i < chains.get(0).size(); i++) {
-                    for(Halfplane h : chains.get(0)) {
-                        y1 = (int)h.getLine().YforX(x1);
-                        y2 = (int)h.getLine().YforX(x2);
+                if (state == 1) { // Текущая полуплоскость
+                    g.setColor(Color.BLACK);
+                    g.drawLine((int)pStart.getX(),
+                        this.getHeight() - (int)pStart.getY(),
+                        (int)mouseX,
+                        (int)mouseY);
 
-                        g.drawLine(x1, this.getHeight() - y1,
-                            x2, this.getHeight() - y2);
-                        g.drawLine(x1+1, this.getHeight() - y1,
-                            x2+1, this.getHeight() - y2);
+                    g.setColor(Color.LIGHT_GRAY);
+                    int m = (this.getHeight() - pStart.getY() > mouseY) ? 1 : -1;
+                    int n = (pStart.getX() > mouseX) ? -1 : 1;
+                    if (Math.abs(this.getHeight() - pStart.getY() - mouseY) >
+                        Math.abs(pStart.getX() - mouseX)) {
+                        n = 0;
+                    } else {
+                        m = 0;
+                    }
+                    for (int j = 1; j <= 6; j++) {
+                        g.drawLine((int)pStart.getX()+j*m,
+                            this.getHeight()-(int)pStart.getY()+j*n,
+                            (int)mouseX+j*m,
+                            (int)mouseY+j*n);
                     }
                 }
-                g.setColor(Color.BLUE);
-                for(int i = 0; i < chains.get(1).size(); i++) {
-                    for(Halfplane h : chains.get(1)) {
-                        y1 = (int)h.getLine().YforX(x1);
-                        y2 = (int)h.getLine().YforX(x2);
 
-                        g.drawLine(x1, this.getHeight() - y1,
-                            x2, this.getHeight() - y2);
-                        g.drawLine(x1+1, this.getHeight() - y1,
-                            x2+1, this.getHeight() - y2);
+                if (state == 2) { // Рисуем пересечение
+
+                    g.setColor(Color.RED);
+
+                    Point cur, next;
+                    for(int i = 0; i < intersection.size(); i++) {
+                        cur = intersection.get(i);
+                        next = intersection.get((i + 1) % intersection.size());
+                        for (int j = -1; j <= 2; j++) {
+                            g.drawLine((int)cur.getX()+((j+1)/2), (int)(getHeight()-cur.getY()+(j/2)),
+                                (int)next.getX()+((j+1)/2), (int)(getHeight()-next.getY()+(j/2)));
+                        }
                     }
-                }*/
+
+                    /*g.setColor(Color.GREEN);
+                    for(int i = 0; i < chains.get(0).size(); i++) {
+                        for(Halfplane h : chains.get(0)) {
+
+                            if (h.getLine().isVertical()) {
+                                y1 = 0;
+                                y2 = this.getHeight();
+                                x1 = (int)h.getLine().XforY(y1);
+                                x2 = (int)h.getLine().XforY(y2);
+                            } else {
+                                x1 = 0;
+                                x2 = this.getWidth();
+                                y1 = (int)h.getLine().YforX(x1);
+                                y2 = (int)h.getLine().YforX(x2);
+                            }
+
+                            g.drawLine(x1, this.getHeight() - y1,
+                                x2, this.getHeight() - y2);
+                            g.drawLine(x1+1, this.getHeight() - y1,
+                                x2+1, this.getHeight() - y2);
+                        }
+                    }
+                    g.setColor(Color.BLUE);
+                    for(int i = 0; i < chains.get(1).size(); i++) {
+                        for(Halfplane h : chains.get(1)) {
+                            if (h.getLine().isVertical()) {
+                                y1 = 0;
+                                y2 = this.getHeight();
+                                x1 = (int)h.getLine().XforY(y1);
+                                x2 = (int)h.getLine().XforY(y2);
+                            } else {
+                                x1 = 0;
+                                x2 = this.getWidth();
+                                y1 = (int)h.getLine().YforX(x1);
+                                y2 = (int)h.getLine().YforX(x2);
+                            }
+
+                            g.drawLine(x1, this.getHeight() - y1,
+                                x2, this.getHeight() - y2);
+                            g.drawLine(x1+1, this.getHeight() - y1,
+                                x2+1, this.getHeight() - y2);
+                        }
+                    }*/
+                }
             }
-        }
-    };
-    jPanel4 = new javax.swing.JPanel();
-    jPanel3 = new javax.swing.JPanel();
-    jButton3 = new javax.swing.JButton();
-    jButton1 = new javax.swing.JButton();
-    jPanel2 = new javax.swing.JPanel();
-    jButton4 = new javax.swing.JButton();
-    jButton2 = new javax.swing.JButton();
+        };
+        jPanel4 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jButton3 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jButton4 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
-    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-    setTitle("Halfplanes intersection");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Halfplanes intersection");
 
-    jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-    jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-            jPanel1MousePressed(evt);
-        }
-    });
-    jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-        public void mouseMoved(java.awt.event.MouseEvent evt) {
-            jPanel1MouseMoved(evt);
-        }
-    });
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                jPanel1MouseMoved(evt);
+            }
+        });
 
-    javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-    jPanel1.setLayout(jPanel1Layout);
-    jPanel1Layout.setHorizontalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 653, Short.MAX_VALUE)
-    );
-    jPanel1Layout.setVerticalGroup(
-        jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGap(0, 303, Short.MAX_VALUE)
-    );
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 653, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+        );
 
-    jButton3.setText("Naive - O(n²)");
-    jButton3.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton3ActionPerformed(evt);
-        }
-    });
+        jButton3.setText("Naive - O(n²)");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-    jButton1.setText("Sweeping line - O(n∙log(n))");
-    jButton1.setEnabled(false);
-    jButton1.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton1ActionPerformed(evt);
-        }
-    });
+        jButton1.setText("Sweeping line - O(n∙log(n))");
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
-    javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-    jPanel3.setLayout(jPanel3Layout);
-    jPanel3Layout.setHorizontalGroup(
-        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton3)
-            .addContainerGap())
-    );
-    jPanel3Layout.setVerticalGroup(
-        jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-    jButton4.setText("Clear");
-    jButton4.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton4ActionPerformed(evt);
-        }
-    });
+        jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
-    jButton2.setText("Halfplanes only");
-    jButton2.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            jButton2ActionPerformed(evt);
-        }
-    });
+        jButton2.setText("Halfplanes only");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-    javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-    jPanel2.setLayout(jPanel2Layout);
-    jPanel2Layout.setHorizontalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-            .addContainerGap(28, Short.MAX_VALUE)
-            .addComponent(jButton2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(4, 4, 4))
-    );
-    jPanel2Layout.setVerticalGroup(
-        jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(4, 4, 4))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
-    javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-    jPanel4.setLayout(jPanel4Layout);
-    jPanel4Layout.setHorizontalGroup(
-        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-    );
-    jPanel4Layout.setVerticalGroup(
-        jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(jPanel4Layout.createSequentialGroup()
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap())
-    );
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
-    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-    getContentPane().setLayout(layout);
-    layout.setHorizontalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    );
-    layout.setVerticalGroup(
-        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-        .addGroup(layout.createSequentialGroup()
-            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    );
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-    pack();
+        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -291,8 +322,12 @@ public class MainFrame extends javax.swing.JFrame {
         } else if (state == 1) {
             pEnd = new Point(evt.getX(), jPanel1.getHeight() - evt.getY());
             
-            halfplanes.add(new Halfplane(new Line(pStart, pEnd),
-                                         pStart.getY() < pEnd.getY()));
+            boolean isRightSide = pStart.getY() < pEnd.getY();
+            if (pStart.getY() == pEnd.getY()) {
+                isRightSide = pStart.getX() < pEnd.getX();
+            }
+            
+            halfplanes.add(new Halfplane(new Line(pStart, pEnd), isRightSide));
             state = 0;
         }
         
