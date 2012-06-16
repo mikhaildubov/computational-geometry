@@ -95,6 +95,16 @@ public class Line {
     }
     
     /**
+     * Determines whether the point lies on the line.
+     * 
+     * @param p The Point
+     * @return true if the point lies on the line, false otherwise
+     */
+    public boolean pointOnLine(Point p) {
+        return (a*p.getX() + b*p.getY() + c == 0);
+    }
+    
+    /**
      * Determines whether the line is ascending
      * (that is, makes an angle with the positive
      * direction of the X axis that lies in (0, pi/2).
@@ -136,6 +146,16 @@ public class Line {
      */
     public boolean isHorizontal() {
         return (a == 0 && b != 0);
+    }
+    
+    /**
+     * Determines whether the line is undefined
+     * (e.g. two equal points were passed to the constructor).
+     * 
+     * @return true, if the line is undefined, false otherwise
+     */
+    public boolean isUndefined() {
+        return (a == 0 && b == 0 && c == 0);
     }
     
     /**
@@ -212,7 +232,7 @@ public class Line {
     
     @Override
     public String toString() {
-        return a + "*x + " + b + "*y + " + c + " = 0";
+        return a + "*x + " + b + "*y + " + c + " = 0.0";
     }
     
     private double a, b, c;

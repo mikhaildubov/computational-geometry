@@ -60,7 +60,7 @@ public class VRMLTerrainScript extends Script {
                 }
                 
                 // Triangulate (Delaunay)
-                triangulation = Delaunay.bruteForce(points);
+                triangulation = Delaunay.randomizedIncremental(points);
                 
                 // Draw (IndexedLineSet)
                 float[] pointCoord = new float[triangulation.size()*9];
@@ -106,7 +106,7 @@ public class VRMLTerrainScript extends Script {
     }
     
     
-    class ProjectedPoint3D extends Point {
+    static class ProjectedPoint3D extends Point {
         
         public ProjectedPoint3D(double x, double y, double z) {
             super(x, y);

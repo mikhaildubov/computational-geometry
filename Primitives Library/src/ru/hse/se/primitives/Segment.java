@@ -46,6 +46,13 @@ public class Segment {
         return right;
     }
     
+    /**
+     * Returns the line the segment lies on.
+     */
+    public Line getLine() {
+        return new Line(left, right);
+    }
+    
     
     @Override
     public boolean equals(Object o2) {

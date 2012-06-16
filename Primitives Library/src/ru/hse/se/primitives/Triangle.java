@@ -7,10 +7,12 @@ package ru.hse.se.primitives;
  * 
  * @author Mikhail Dubov
  */
-public class Triangle {
+public class Triangle implements Cloneable {
     
     /**
      * Initializes a triangle by its vertices.
+     * NB: Changes the order of vertices 
+     *     to make it counterclockwise.
      * 
      * @param A The first vertex
      * @param B The second vertex
@@ -43,27 +45,108 @@ public class Triangle {
      * Determines whether a point lies inside the triangle.
      * 
      * @param p The point
-     * @return true, whether the point lies inside the triangle, false otherwise
+     * @return true, if the point lies inside the triangle,
+     *         false otherwise
      */
     public boolean pointInside(Point p) {
+        return pointInside(p, true);
+    }
+    
+    
+    /**
+     * Determines whether a point lies inside the triangle.
+     * 
+     * @param p The point
+     * @param strict true, if the point may not lie on the boundary,
+     *               false otherwise
+     * @return true, if the point lies inside the triangle,
+     *         false otherwise
+     */
+    public boolean pointInside(Point p, boolean strict) {
         
-        boolean l1 = Point.isLeftTurn(a, b, p);
-        boolean l2 = Point.isLeftTurn(b, c, p);
-        boolean l3 = Point.isLeftTurn(c, a, p);
-        
-        if (l1 && l2 && l3) {
-            return true;
-        }
-        
-        boolean r1 = Point.isRightTurn(a, b, p);
-        boolean r2 = Point.isRightTurn(b, c, p);
-        boolean r3 = Point.isRightTurn(c, a, p);
-        
-        if (r1 && r2 && r3) {
-            return true;
-        }
+        if (strict) {
             
-        return false;
+            boolean l1 = Point.isLeftTurn(a, b, p);
+            boolean l2 = Point.isLeftTurn(b, c, p);
+            boolean l3 = Point.isLeftTurn(c, a, p);
+
+            if (l1 && l2 && l3) {
+                return true;
+            }
+
+            boolean r1 = Point.isRightTurn(a, b, p);
+            boolean r2 = Point.isRightTurn(b, c, p);
+            boolean r3 = Point.isRightTurn(c, a, p);
+
+            if (r1 && r2 && r3) {
+                return true;
+            }
+
+            return false;
+            
+        } else {
+            
+            boolean l1 = ! Point.isRightTurn(a, b, p);
+            boolean l2 = ! Point.isRightTurn(b, c, p);
+            boolean l3 = ! Point.isRightTurn(c, a, p);
+
+            if (l1 && l2 && l3) {
+                return true;
+            }
+
+            boolean r1 = ! Point.isLeftTurn(a, b, p);
+            boolean r2 = ! Point.isLeftTurn(b, c, p);
+            boolean r3 = ! Point.isLeftTurn(c, a, p);
+
+            if (r1 && r2 && r3) {
+                return true;
+            }
+
+            return false;
+        }
+    }
+    
+    /**
+     * Determines whether a point lies on an edge of the triangle.
+     * 
+     * @param p The point
+     * @return true, if the point lies on an edge of the triangle,
+     *         false otherwise
+     */
+    public boolean pointOnTheEdge(Point p) {
+        return getSideLine(Side.AB).pointOnLine(p) ||
+                getSideLine(Side.BC).pointOnLine(p) ||
+                getSideLine(Side.AC).pointOnLine(p);
+    }
+    
+    /**
+     * Determines whether a point lies in the interior of the triangle.
+     * 
+     * @param p The point
+     * @return true, if the point lies in the interior of the triangle,
+     *         false otherwise
+     */
+    public boolean pointInTheInterior(Point p) {
+        return ! pointOnTheEdge(p);
+    }
+    
+    /**
+     * Determines whether a point lies on an edge of the triangle.
+     * Returns that edge.
+     * 
+     * @param p The point
+     * @return The triangle side
+     */
+    public Side getPointSide(Point p) {
+        if (getSideLine(Side.AB).pointOnLine(p)) {
+            return Side.AB;
+        } else if (getSideLine(Side.BC).pointOnLine(p)) {
+            return Side.BC;
+        } else if (getSideLine(Side.AC).pointOnLine(p)) {
+            return Side.AC;
+        } else {
+            return null;
+        }
     }
     
     /**
@@ -105,6 +188,36 @@ public class Triangle {
             case 0: return a; 
             case 1: return b;
             case 2: return c;
+            default: return null;
+        }
+    }
+    
+    /**
+     * Returns a side line of the triangle.
+     * 
+     * @param s The side
+     * @return The line that corresponds to the side
+     */
+    public Line getSideLine(Side s) {
+        switch(s) {
+            case AB: return new Line(this.getA(), this.getB());
+            case BC: return new Line(this.getB(), this.getC());
+            case AC: return new Line(this.getA(), this.getC());
+            default: return null;
+        }
+    }
+    
+    /**
+     * Returns a side of the triangle.
+     * 
+     * @param s The side
+     * @return The segment that corresponds to the side
+     */
+    public Segment getSide(Side s) {
+        switch(s) {
+            case AB: return new Segment(this.getA(), this.getB());
+            case BC: return new Segment(this.getB(), this.getC());
+            case AC: return new Segment(this.getA(), this.getC());
             default: return null;
         }
     }
@@ -162,13 +275,15 @@ public class Triangle {
         }
     }
     
-    /*public void setTag(Side s, boolean value) {
-        switch (s) {
-            case AB: tagAB = value; break;
-            case BC: tagBC = value; break;
-            case AC: tagAC = value; break;
-        }
-    }*/
+    /**
+     * Sets the tag to store some additional information
+     * (e.g. to link the triangle wirh some data structure).
+     * 
+     * @param t Tag
+     */
+    public void setTag(Object t) {
+        tag = t;
+    }
     
     /**
      * Returns an adjacent triangle.
@@ -186,6 +301,28 @@ public class Triangle {
     }
     
     /**
+     * Returns the side that another triangle is 
+     * adjacent to the current along.
+     * 
+     * @param s The side of the current triangle
+     *          to look for the adjacent triangle
+     * @return The side of the adjacent triangle
+     */
+    public Side getAdjacentSide(Side s) {
+        Triangle t2 = this.getAdjacent(s);
+        Triangle.Side res = null;
+        if (t2 != null) {
+            for (Triangle.Side sd : Triangle.Side.values()) {
+                if (t2.isAdjacent(this, sd)) {
+                    res = sd;
+                    break;
+                }
+            }
+        }
+        return res;
+    }
+    
+    /**
      * Determines whether the given triangle
      * is adjacent for the given side.
      * 
@@ -197,17 +334,28 @@ public class Triangle {
         return this.getAdjacent(s) == t;
     }
     
-    /*public boolean getTag(Side s) {
-        switch (s) {
-            case AB: return tagAB;
-            case BC: return tagBC;
-            case AC: return tagAC;
-            default: return false;
-        }
-    }*/
+    /**
+     * Determines whether the point
+     * is a vertex of the current triangle.
+     * 
+     * @param p Point
+     * @return true if the point is the vertex of the triangle, false otherwise
+     */
+    public boolean containsVertex(Point p) {
+        return a.equals(p) || b.equals(p) || c.equals(p);
+    }
     
     /**
-     * Flips the common edge of the two triangles.
+     * Returns the tag of the triangle.
+     * 
+     * @return tag
+     */
+    public Object getTag() {
+        return tag;
+    }
+    
+    /**
+     * Flips the common edge of the two triangles (in-place).
      * Assumes that the adjacend sides are given correctly.
      * 
      * @param s1 The side of the current triangle to be flipped
@@ -293,6 +441,8 @@ public class Triangle {
         return cr.isInside(t2.getIth((s2.ordinal()+2) % 3));
     }
     
+    
+    
     /**
      * The enum for the triangle sides.
      */
@@ -323,11 +473,58 @@ public class Triangle {
         int i;
     }
     
+    @Override
+    public Object clone() {
+        
+        Triangle res = new Triangle(a, b, c);
+        res.adjAB = this.adjAB;
+        res.adjBC = this.adjBC;
+        res.adjAC = this.adjAC;
+        //res.tag = this.tag;
+        
+        return res;
+    }
+    
+    @Override
+    public boolean equals(Object o2) {
+        
+        if (! (o2 instanceof Triangle)) {
+            return false;
+        }
+        
+        Triangle t2 = (Triangle) o2;
+        
+        return this.getA().equals(t2.getA()) &&
+                this.getB().equals(t2.getB()) &&
+                this.getC().equals(t2.getC()) ||
+               this.getA().equals(t2.getB()) &&
+                this.getB().equals(t2.getC()) &&
+                this.getC().equals(t2.getA()) ||
+               this.getA().equals(t2.getC()) &&
+                this.getB().equals(t2.getA()) &&
+                this.getC().equals(t2.getB()) ||
+               this.getA().equals(t2.getC()) &&
+                this.getB().equals(t2.getB()) &&
+                this.getC().equals(t2.getA()) ||
+               this.getA().equals(t2.getB()) &&
+                this.getB().equals(t2.getA()) &&
+                this.getC().equals(t2.getC()) ||
+               this.getA().equals(t2.getA()) &&
+                this.getB().equals(t2.getC()) &&
+                this.getC().equals(t2.getB());
+    }
+    
     /** The vertices **/
     protected Point a, b, c;
     
     /** The pointers to adjacent triangles **/
     protected Triangle adjAB, adjBC, adjAC;
+    
+    /**
+     * Tag to store some additional information
+     * (e.g. to link the triangle wirh some data structure).
+     */
+    private Object tag;
     
     //protected boolean tagAB, tagBC, tagAC;
 }

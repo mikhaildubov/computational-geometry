@@ -3,6 +3,7 @@ package delaunay;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Stack;
 import ru.hse.se.primitives.Point;
 import ru.hse.se.primitives.Triangle;
@@ -13,8 +14,10 @@ public class PointsTriangulation {
     /**
      * Computes some [bad] points triangulation to be used
      * in the brute force edge flipping algorithm.
+     * 
+     * @return Triangulation
      */
-    public static ArrayList<Triangle> some(ArrayList<Point> points) {
+    public static ArrayList<Triangle> some(List<Point> points) {
         
         Point p0 = getLowestPoint(points);
         points.remove(p0);
@@ -127,7 +130,7 @@ public class PointsTriangulation {
         return (crossProduct(p0, p1, p2) < 0);
     }
     
-    private static Point getLowestPoint(ArrayList<Point> points) {
+    private static Point getLowestPoint(List<Point> points) {
         Point result = points.get(0);
         
         Point candidate;

@@ -76,7 +76,8 @@ The project contains both implementations and visualization tools for basic comp
 <tr>
 <td valign = "top" width = "50%">
 <ul>
- <li>Brute force "Edge flipping" algorithm
+ <li>Randomized incremental construction - <b><em>O(n&#183;lg(n))</em></b>
+ <li>Brute force "Edge flipping" algorithm - <b><em>O(n<sup>2</sup>)</em></b>
 </ul>
 </td>
 <td align = "right" width = "50%">
