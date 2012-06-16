@@ -30,7 +30,6 @@ public class Delaunay {
         
         // The triangle that embraces the set of points (p0 p_1 p_2)
         Triangle initTriangle = embracingTriangle(p);
-        p.remove(initTriangle.getB());
         
         // Init the DAG
         TriangulationDAG triangulationDAG = new TriangulationDAG();
@@ -347,7 +346,7 @@ public class Delaunay {
     /**
      * Fisher-Yates random shuffling algorithm
      * (Also known as Knuth shuffling,
-     * see algorithm 3.4.2P in [TAOCP II]).
+     * see algorithm 3.4.2P from [TAOCP II]).
      * 
      * @param <T> ArrayList generic type
      * @param list List that needs to be shuffled
