@@ -108,7 +108,7 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 </table><br>
 
-<h3>Voronoi diagram/h3>
+<h3>Voronoi diagram</h3>
 <table border = "0" width = "100%">
 <td valign = "top" width = "50%">
 <ul>
