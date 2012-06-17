@@ -77,7 +77,7 @@ The project contains both implementations and visualization tools for basic comp
 <td valign = "top" width = "50%">
 <ul>
  <li>Randomized incremental construction - <b><em>O(n&#183;lg(n))</em></b>
- <li>Brute force "Edge flipping" algorithm - <b><em>O(n<sup>2</sup>)</em></b>
+ <li>Brute force edge flipping algorithm - <b><em>O(n<sup>3</sup>)</em></b>
 </ul>
 </td>
 <td align = "right" width = "50%">
@@ -105,6 +105,18 @@ The project contains both implementations and visualization tools for basic comp
 </td>
 <td align = "right" width = "50%">
 <img src = "http://s019.radikal.ru/i618/1204/4e/8e367bf8d9be.png"/>
+</td>
+</table><br>
+
+<h3>Voronoi diagram/h3>
+<table border = "0" width = "100%">
+<td valign = "top" width = "50%">
+<ul>
+ <li>Construction via Halfplanes intersection - <b><em>O(n<sup>3</sup>)</em></b>
+</ul>
+</td>
+<td align = "right" width = "50%">
+<img src = "http://s017.radikal.ru/i430/1206/1e/70662e2514b0.png"/>
 </td>
 </table><br><br><br>
 
