@@ -15,7 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        halfplanes = new ArrayList<Halfplane>();
+        halfplanes = Halfplane.boundingRectangle(-10000, 10000, -10000, 10000);
         state = 0;
     }
 
@@ -309,7 +309,8 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        halfplanes = new ArrayList<Halfplane>();
+        
+        halfplanes = Halfplane.boundingRectangle(-10000, 10000, -10000, 10000);
         state = 0;
         
         jPanel1.repaint();
@@ -394,7 +395,7 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private ArrayList<Halfplane> halfplanes;
-    private ArrayList<ArrayList<Halfplane>> chains;
+    //private ArrayList<ArrayList<Halfplane>> chains;
     private Polygon intersection;
     private Point pStart, pEnd;
     private double mouseX, mouseY;

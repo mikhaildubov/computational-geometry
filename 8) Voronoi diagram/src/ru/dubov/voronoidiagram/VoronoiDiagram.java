@@ -31,19 +31,11 @@ public class VoronoiDiagram {
         Segment p1p2;
         Line p1p2perp;
         
-        // Bounding rectangle
-        Halfplane left = new Halfplane(new Line(new Point(-10000, 0), new Point(-10000, 1)), true);
-        Halfplane upper = new Halfplane(new Line(new Point(0, 10000), new Point(1, 10000)), true);
-        Halfplane right = new Halfplane(new Line(new Point(10000, 0), new Point(10000, 1)), false);
-        Halfplane bottom = new Halfplane(new Line(new Point(0, -10000), new Point(1, -10000)), false);
-        
         // Calculating Voronoi cells for each point
         for (Point p1 : points) {
             
             // Initializing halfplanes set with the bounding ones
-            halfplanes = new ArrayList<Halfplane>();
-            halfplanes.add(left); halfplanes.add(upper);
-            halfplanes.add(right); halfplanes.add(bottom);
+            halfplanes = Halfplane.boundingRectangle(-10000, 10000, -10000, 10000);
             
             // Getting halfplanes
             for (Point p2 : points) {

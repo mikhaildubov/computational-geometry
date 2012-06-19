@@ -1,5 +1,7 @@
 package ru.dubov.primitives;
 
+import java.util.ArrayList;
+
 /**
  * Represents a halfplane by means of the boundary line
  * ax + by = c, where one accepts that
@@ -78,6 +80,40 @@ public class Halfplane {
                 return (p.getX() < line.XforY(p.getY()));
             }
         }
+    }
+    
+    /**
+     * Initializes a set of halfplanes with a bounding rectangle.
+     * 
+     * @param x1 left X coordinate
+     * @param x2 right X coordinate
+     * @param y1 bottom Y coordinate
+     * @param y2 upper Y coordinate
+     * @return Set of bounding halfplanes
+     */
+    public static ArrayList<Halfplane> boundingRectangle(double x1, double x2,
+                                                         double y1, double y2) {
+        
+        ArrayList<Halfplane> res = new ArrayList<Halfplane>();
+        
+        if (x1 > x2) {
+            double temp = x1;
+            x1 = x2;
+            x2 = temp;
+        }
+        
+        if (y1 > y2) {
+            double temp = y1;
+            y1 = y2;
+            y2 = temp;
+        }
+        
+        res.add(new Halfplane(new Line(new Point(x1, 0), new Point(x1, 1)), true));
+        res.add(new Halfplane(new Line(new Point(0, y2), new Point(1, y2)), true));
+        res.add(new Halfplane(new Line(new Point(x2, 0), new Point(x2, 1)), false));
+        res.add(new Halfplane(new Line(new Point(0, y1), new Point(1, y1)), false));
+        
+        return res;
     }
     
     private Line line;

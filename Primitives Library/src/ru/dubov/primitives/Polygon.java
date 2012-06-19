@@ -1,6 +1,7 @@
 package ru.dubov.primitives;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * Represents a polygon.
@@ -150,6 +151,22 @@ public class Polygon implements Cloneable {
         }
         
         return true;
+    }
+    
+    /**
+     * Makes the current polygon to be set in counterclockwise order.
+     */
+    public void makeCounterClockwise() {
+        
+        if (isClockwise()) {
+            Point temp;
+            for (int i = 1; i <= vertices.size() / 2; i++) {
+                temp = vertices.get(i);
+                vertices.set(i, vertices.get(vertices.size()-i));
+                vertices.set(vertices.size()-i, temp);
+            }
+        }
+        isClockwise = false;
     }
     
     /**

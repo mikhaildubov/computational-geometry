@@ -2,6 +2,7 @@ package ru.dubov.delaunay.test;
 
 import ru.dubov.delaunay.Delaunay;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
 import junit.framework.TestCase;
 import ru.dubov.primitives.*;
@@ -38,5 +39,48 @@ public class DelaunayTest extends TestCase {
         }
         
         assertTrue(true);
+    }
+    
+    
+    public void testTimeBruteForce() {
+        
+        Random rand = new Random();
+        
+        for (int i = 20; i <= 5000; i += 20) {
+            
+            ArrayList<Point> pts = new ArrayList<Point>();
+            
+            for(int j = 0; j < i; j++) {
+                pts.add(new Point(rand.nextDouble()*10, rand.nextDouble()*10));
+            }
+            
+            double start = Calendar.getInstance().getTimeInMillis();
+            
+            Delaunay.bruteForce(pts);
+            
+            System.out.println(Calendar.getInstance().getTimeInMillis()-start);
+        }
+        
+    }
+        
+    public void testTimeRandomized() {
+        
+        Random rand = new Random();
+        
+        for (int i = 5020; i <= 8000; i += 20) {
+            
+            ArrayList<Point> pts = new ArrayList<Point>();
+            
+            for(int j = 0; j < i; j++) {
+                pts.add(new Point(rand.nextDouble()*10, rand.nextDouble()*10));
+            }
+            
+            double start = Calendar.getInstance().getTimeInMillis();
+            
+            Delaunay.randomizedIncremental(pts);
+            
+            System.out.println(Calendar.getInstance().getTimeInMillis()-start);
+        }
+        
     }
 }
