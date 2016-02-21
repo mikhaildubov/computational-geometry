@@ -46,6 +46,13 @@ public class MainFrame extends javax.swing.JFrame {
                     }
                 }
 
+                if (state == 2) {
+                    for (MonotonePartitioningAlgorithm.Diagonal d : diag) {
+                        g.drawLine((int)tempPolygon.get(d.getA()).getX(), (int)(getHeight() - tempPolygon.get(d.getA()).getY()),
+                            (int)tempPolygon.get(d.getB()).getX(), (int)(getHeight() - tempPolygon.get(d.getB()).getY()));
+                    }
+                }
+
                 g.setColor(Color.BLACK);
 
                 // Рисуем полигон
@@ -115,8 +122,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("By Monotone partitioning - O(n∙log(n))");
-        jButton5.setEnabled(false);
+        jButton5.setText("by Monotone partitioning - O(n∙log(n))");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -224,12 +230,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         triangulation = VanGoghAlgorithm.slow((Polygon)polygon.clone());
         
-        if (triangulation != null) {
-            state = 1;
-        } else {
-            polygon = new Polygon();            
-            tempPolygon = new Polygon();
-        }
+        state = 1;
         
         jPanel1.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -239,17 +240,13 @@ public class MainFrame extends javax.swing.JFrame {
         
         triangulation = VanGoghAlgorithm.fast((Polygon)polygon.clone());
         
-        if (triangulation != null) {
-            state = 1;
-        } else {
-            polygon = new Polygon();
-            tempPolygon = new Polygon();
-        }
+        state = 1;
         
         jPanel1.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
         state = 0;
         
         jPanel1.repaint();
@@ -278,6 +275,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO O(nlgn)
+        
+        diag = MonotonePartitioningAlgorithm.makeMonotone(tempPolygon);
+        
+        state = 2;
+        
+        jPanel1.repaint();
+        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -285,12 +289,7 @@ public class MainFrame extends javax.swing.JFrame {
         
         triangulation = DivideAndConquerAlgorithm.triangulate((Polygon)polygon.clone());
         
-        if (triangulation != null) {
-            state = 1;
-        } else {
-            polygon = new Polygon();
-            tempPolygon = new Polygon();
-        }
+        state = 1;
         
         jPanel1.repaint();
     }//GEN-LAST:event_jButton6ActionPerformed
@@ -376,5 +375,6 @@ public class MainFrame extends javax.swing.JFrame {
     private Polygon polygon; // for calculating the triangulation
     private Polygon tempPolygon; // for visualisation
     private ArrayList<Triangle> triangulation;
+    private ArrayList<MonotonePartitioningAlgorithm.Diagonal> diag;
     int state;
 }

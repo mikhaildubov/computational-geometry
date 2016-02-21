@@ -74,9 +74,9 @@ public class VanGoghAlgorithm {
                 
                 isEar = Point.isLeftTurn(l, v, r) ^ isClockwise;
                 
-                if (isEar) { // Further analysis required
-                    for (int i = 0; i < p.size(); i++) {
-                        if (tr.pointInside(p.get(i))) {
+                if (isEar) { // Further analysis required 
+                    for (int i = 0; i < p.size(); i++) { // (there shoud be 
+                        if (tr.pointInside(p.get(i))) {  // no points inside)
                             isEar = false;
                             break;
                         }

@@ -55,7 +55,7 @@ public class Point {
     
     /**
      * Calculates the cross product
-     * of two vectors (p0, p1) and (p1, p2)
+     * of two vectors (p0, p1) and (p0, p2)
      * defined by three points p0, p1 and p2.
      * 
      * @param p0 The first point

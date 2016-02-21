@@ -57,13 +57,13 @@ public class ClosestPair {
                 
         ArrayList<Point> resultPair = new ArrayList<Point>();
 
-        // База рекурсии - случай |P| <= 3
+        // Recursion base case: |P| <= 3
         if (X.size() <= 1) {
             resultPair = null;
         } else if (X.size() == 2) {
             resultPair = X;
         } else if (X.size() == 3) {
-            // |P| == 3 => Грубый перебор
+            // |P| == 3 => Brute force
             double dist1 = dist(X.get(0), X.get(1));
             double dist2 = dist(X.get(0), X.get(2));
             double dist3 = dist(X.get(1), X.get(2));
@@ -86,11 +86,11 @@ public class ClosestPair {
                 }
             }
         }
-        // Шаг рекурсии - разделяй и властвуй
+        // Recursion step: divide & conquer
         else {
             double lX = (X.get(X.size() / 2)).getX();
 
-            // Разделяй ...
+            // Divide ...
 
             ArrayList<Point> XL = new ArrayList<Point>();
             ArrayList<Point> XR = new ArrayList<Point>();
@@ -114,12 +114,13 @@ public class ClosestPair {
                 }
             }
             
-            // Приходится специально обрабатывать вырожденный случай, когда
-            // все точки уходят налево (например, если у них равны координаты X)
-            // TODO: Потенциально деградация до O(n^2), если все точки на оси Y.
+            // The degenerate case when all the points go to the left should be
+            // treated with care. This happens e.g. when all the points have
+            // the same X coordinate.
+            // TODO(mikhaildubov): performance can degrade to O(n^2) here if
+            //                     all the points are on the Y axis.
             if (XR.size() == 0) {
-                // Пока что решение - просто перекидываем
-                // крайнюю справа точку из XL направо, в XR
+                // Temporary solution: just move the "rightmost" point from XL to XR
                 Point repl = XL.get(XL.size()-1);
                 
                 XL.remove(repl);
@@ -130,7 +131,7 @@ public class ClosestPair {
             }
             
 
-            // ... Властвуй ...
+            // ... Conquer ...
 
             ArrayList<Point> ClosestLeft = ClosestPair(XL, YL);
             ArrayList<Point> ClosestRight = ClosestPair(XR, YR);
@@ -141,7 +142,7 @@ public class ClosestPair {
             double distRight = dist(ClosestRight);
             double distBetween = dist(ClosestBetween);
 
-            // ... Объединяй.
+            // ... Combine.
 
             if (distLeft < distRight) {
                 if (distBetween < distLeft) {
@@ -164,7 +165,7 @@ public class ClosestPair {
     private static ArrayList<Point> ClosestBetweenSubsets(ArrayList<Point> X, ArrayList<Point> Y, double d) {
         double lX = (X.get(X.size() / 2)).getX();
 
-        // Заполняем Y2
+        // Populate the Y2 list
         ArrayList<Point> Y2 = new ArrayList<Point>();
         for (int i = 0; i < Y.size(); i++) {
             if (Math.abs((Y.get(i)).getX() - lX) <= d) {
@@ -172,7 +173,7 @@ public class ClosestPair {
             }
         }
 
-        // Проходимся по Y2 в поисках ближайших точек
+        // Iterate over Y2 in search of the nearest points
         if (Y2.size() < 2) {
             return null;
         }
@@ -180,7 +181,7 @@ public class ClosestPair {
         Point p1 = Y2.get(0);
         Point p2 = Y2.get(1);
 
-        // Достаточно просмотреть 7 точек
+        // It is enough to check only 7 points
         for (int i = 0; i < Y2.size() - 1; i++) {
             for (int j = i + 1; j <= Math.min(i + 8, Y2.size() - 1); j++)
                 if (dist(Y2.get(i), Y2.get(j)) < dist(p1, p2)) {

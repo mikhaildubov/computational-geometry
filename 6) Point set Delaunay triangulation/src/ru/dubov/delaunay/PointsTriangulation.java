@@ -99,9 +99,9 @@ public class PointsTriangulation {
         public PointComparator(Point p0) {
             this.p0 = p0;
         }
-        
-        // Сравнение точек по их полярному углу относительно p0;
-        // если совпадает - то по удаленности от p0.
+
+        // Compare two points by their polar angle with respect to p0;
+        // in case the angle is the same, the distance to p0 is used
         @Override
         public int compare(Point p1, Point p2) {
             
@@ -109,8 +109,9 @@ public class PointsTriangulation {
             
             if (crossProduct > 0) return -1;
             if (crossProduct < 0) return 1;
-            
-            // cross_product = 0, векторы коллинеарны -> нужен тот, что дальше
+
+            // cross_product = 0 => the vectors are collinear, and the vertex
+            // that lies further from p0 should be considered "larger"
             double d1 = p0.dist(p1);
             double d2 = p0.dist(p2);
             

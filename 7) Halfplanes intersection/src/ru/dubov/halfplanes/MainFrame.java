@@ -15,7 +15,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         setLocationRelativeTo(null);
-        halfplanes = Halfplane.boundingRectangle(-10000, 10000, -10000, 10000);
+        halfplanes = Halfplane.boundingRectangle(-bound, bound, -bound, bound);
         state = 0;
     }
 
@@ -310,7 +310,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
-        halfplanes = Halfplane.boundingRectangle(-10000, 10000, -10000, 10000);
+        halfplanes = Halfplane.boundingRectangle(-bound, bound, -bound, bound);
         state = 0;
         
         jPanel1.repaint();
@@ -400,4 +400,5 @@ public class MainFrame extends javax.swing.JFrame {
     private Point pStart, pEnd;
     private double mouseX, mouseY;
     int state;
+    int bound = 10000;
 }

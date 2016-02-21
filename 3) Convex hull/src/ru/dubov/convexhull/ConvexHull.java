@@ -17,23 +17,24 @@ public class ConvexHull {
      * using the Graham's scan algorithm - O(n*log(n)).
      */ 
     public static Polygon Graham(ArrayList<Point> pointsList) {
-        
-        // Список точек будет меняться (предполагаем, что pointsList.size >= 3)
+
+        // Clone the list of points as it will be changed during the algorithm.
+        // We assume that pointsList.size >= 3.
         
         ArrayList<Point> points = (ArrayList<Point>)pointsList.clone();
         Stack<Point> result = new Stack<Point>();
-        
-        // Получаем нижнюю левую точку - первую вершину оболочки - O(n)
+
+        // Get the lowest most left point - the first vertex of the convex hull - in O(n)
         
         Point p0 = getLowestPoint(points);
         result.push(p0);
         points.remove(p0);
         
-        // Оставшиеся вершины сортируем по возрастанию полярного угла - O(n*log(n))
+        // Sort the rest of the points by their polar angle - in O(n*log(n))
         
         Collections.sort(points, new PointComparator(p0));
         
-        // Перед началом сканирования заносим еще две точки в стек
+        // Add two more points to the stack before starting the Graham's scan
         
         Iterator<Point> iter = points.iterator();
         
@@ -43,8 +44,8 @@ public class ConvexHull {
         Point p2 = iter.next();
         result.push(p2);
         
-        // Совершаем проход по отсортированному списку,
-        // определяя, какие вершины входят в оболочку - O(n)
+        // Traverse the sorted point list, determining which points
+        // should go to the convex hull - in O(n)
         
         while (iter.hasNext()) {
             Point pi = iter.next();
@@ -54,16 +55,16 @@ public class ConvexHull {
             while (! isLeftTurn(nextToTop, top, pi)) {
                 result.pop();
                 
-                // Не забываем обновить 
+                // Update the "top" vertex
                 top = nextToTop;
                 nextToTop = result.elementAt(result.size() - 2);
             }
             
             result.push(pi);
         }
-        
-        // Оболочка построена, возвращаем список точек
-        // в порядке обхода против часовой стрелки
+
+        // The convex hull has been constructed, now return the list
+        // of its vertices in CCW order
         
         ArrayList<Point> polygon = new ArrayList<Point>();
         while(! result.empty()) {
@@ -81,19 +82,20 @@ public class ConvexHull {
      * so the worst case is O(n^2).
      */
     public static Polygon Jarvis(ArrayList<Point> pointsList) {
-        
-        // Список точек будет меняться (предполагаем, что pointsList.size >= 3)
+
+        // Clone the list of points as it will be changed during the algorithm.
+        // We assume that pointsList.size >= 3.
         
         ArrayList<Point> points = (ArrayList<Point>)pointsList.clone();
         ArrayList<Point> result = new ArrayList<Point>();
-        
-        // Получаем нижнюю левую точку - первую вершину оболочки - O(n)
+
+        // Get the lowest most left point - the first vertex of the convex hull - in O(n)
         
         Point p0 = getLowestPoint(points);
         result.add(p0);
         points.remove(p0);
-        
-        // Получаем последнюю вершину оболочки - O(n)
+
+        // Get the last vertex of the convex hull - in O(n)
         
         Point pE = points.get(0);
         Point candidate;
@@ -104,12 +106,13 @@ public class ConvexHull {
             }
         }
         
-        // Строим цепь - O(h) шагов...
+        // Construct the chain - O(h) steps...
         
         Point next = null;
         Point last = p0;
         do {
-            // ... на каждом - перебор O(n) точек, итого O(n*h) операций
+            // ... with each step scanning O(n) points,
+            // so O(n*h) operations in total
             next = points.get(0);
             
             for(int i = 1; i < points.size(); i++) {
@@ -126,9 +129,9 @@ public class ConvexHull {
             last = next;
             
         } while(next != pE);
-        
-        // Оболочка построена, возвращается список точек
-        // в порядке обхода против часовой стрелки
+
+        // The convex hull has been constructed, now return the list
+        // of its vertices in CCW order
         
         return new Polygon(result);
     }
@@ -144,9 +147,9 @@ public class ConvexHull {
         public PointComparator(Point p0) {
             this.p0 = p0;
         }
-        
-        // Сравнение точек по их полярному углу относительно p0;
-        // если совпадает - то по удаленности от p0.
+
+        // Compare two points by their polar angle with respect to p0;
+        // in case the angle is the same, the distance to p0 is used
         @Override
         public int compare(Point p1, Point p2) {
             
@@ -154,8 +157,9 @@ public class ConvexHull {
             
             if (crossProduct > 0) return -1;
             if (crossProduct < 0) return 1;
-            
-            // cross_product = 0, векторы коллинеарны -> нужен тот, что дальше
+
+            // cross_product = 0 => the vectors are collinear, and the vertex
+            // that lies further from p0 should be considered "larger"
             double d1 = p0.dist(p1);
             double d2 = p0.dist(p2);
             

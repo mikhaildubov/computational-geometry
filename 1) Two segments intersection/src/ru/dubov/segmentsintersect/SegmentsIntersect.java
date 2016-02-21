@@ -10,7 +10,7 @@ import ru.dubov.primitives.Segment;
 
 /**
  * Determines whether the two given segments intersect in O(1),
- * as depicted in "Introduction to Algorithms" by T.Cormen et al.
+ * as described in "Introduction to Algorithms" by Cormen et al.
  * 
  * @author Mikhail Dubov
  */

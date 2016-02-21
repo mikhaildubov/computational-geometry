@@ -7,7 +7,13 @@ import ru.dubov.primitives.Triangle;
 public class DivideAndConquerAlgorithm {
     
     /**
-     * O(n^4) worst case (!)
+     * Calculates the polygon triangulation
+     * using primitive divide & conquer strategy.
+     * 
+     * This implementation runs in O(n^4) worst case (!).
+     * 
+     * @param p Polygon.
+     * @return The array of triangles.
      */
     public static ArrayList<Triangle> triangulate(Polygon p) {
         

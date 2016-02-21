@@ -12,7 +12,7 @@ public class SegmentsIntersect {
     
     /**
      * Determines whether any two segments in the given set intersect
-     * using the naive approach in O(n^2).
+     * using the naive approach that runs in O(n^2).
      * 
      * @param segments The set of segments
      * @return true, if any segments intersect, false otherwise
@@ -35,33 +35,32 @@ public class SegmentsIntersect {
     
     /**
      * Determines whether any two segments in the given set intersect
-     * using the "sweeping line" algorithm in O(n*lg(n)).
+     * using the "sweeping line" algorithm that runs in O(n*lg(n)).
      * 
      * @param segments The set of segments
      * @return true, if any segments intersect, false otherwise
      */
     public static boolean any(ArrayList<Segment> segments) {
         
-        // Красно-черное дерево, которое будет поддерживать
-        // упорядоченное множество отрезков с затратами сложности O(n*lg(n))
+        // A Red-Black tree that will support an ordered set of
+        // segments with O(n*lg(n)) time complexity
         TreeSet<Segment> segmentsTree =
                 new TreeSet<Segment>(segmentsComparator);
         
-        // Массив точек - концов отрезков, отсортированных по X
+        // An array of segment endpoints, sorted by their X coordinate
         ArrayList<Point> points = new ArrayList<Point>();
         for (Segment s : segments) {
             points.add(s.getLeft());
             points.add(s.getRight());
         }
         Collections.sort(points, PointsComparatorX);
-        
-        foundBoundaryCase = false; // Для учета возможных граничных случаев
-        
-        Segment pSegm; // временная переменная
+
+        Segment pSegm;
+        foundBoundaryCase = false;
         
         for (Point p : points) { // Проход по упорядоченному списку точек
             
-            // (!) Задаем компаратору координату X, в которой идет сравнение
+            // Set the X coordinate that will be used to perform the comparison
             segmentsComparator.setX(p.getX());
             
             pSegm = p.getSegment();
@@ -183,18 +182,19 @@ public class SegmentsIntersect {
         @Override
         public int compare(Segment s1, Segment s2) {
 
-            // 1. Точки не сравнимы в координате x
+            // The case when the points are not comparable in the X coordinate
             if (x < s1.getLeft().getX() || x > s1.getRight().getX() ||
                 x < s2.getLeft().getX() || x > s2.getRight().getX()) {
                 return 0;
             }
 
-            // 2. Вычисляем координаты y для соответствующих координат x
+            // Compute the Y coordinates for the corresponding X coordinates
             double y1 = yForX(s1, x);
             double y2 = yForX(s2, x);
 
             if (Double.isNaN(y1)) {
-                if(s1.getLeft().getY() >= y2 && s1.getRight().getY() <= y2) {  // Граничный случай!
+                if(s1.getLeft().getY() >= y2 && s1.getRight().getY() <= y2) {
+                    // a boundary case
                     segm1 = s1;
                     segm2 = s2;
                     foundBoundaryCase = true;
@@ -207,7 +207,8 @@ public class SegmentsIntersect {
                     return 0;
                 }
             } else if (Double.isNaN(y2)) {
-                if(s2.getLeft().getY() >= y1 && s2.getRight().getY() <= y1) {  // Граничный случай!
+                if(s2.getLeft().getY() >= y1 && s2.getRight().getY() <= y1) {
+                    // a boundary case
                     segm1 = s1;
                     segm2 = s2;
                     foundBoundaryCase = true;
@@ -224,17 +225,18 @@ public class SegmentsIntersect {
             } else if (y1 > y2) {
                 return 1;
             } else {
-                if(s1 != s2) { // Граничный случай!
-                  segm1 = s1;
-                  segm2 = s2;
-                  foundBoundaryCase = true;
+                if(s1 != s2) {
+                    // a boundary case
+                    segm1 = s1;
+                    segm2 = s2;
+                    foundBoundaryCase = true;
                 }
                 return 0;
             }
         }
 
         /**
-         * sets the X coordinate to perform the comparison in.
+         * Sets the X coordinate to perform the comparison in.
          */
         public void setX(double x) {
             this.x = x;
@@ -268,15 +270,14 @@ public class SegmentsIntersect {
                 } else if (p1.getX() > p2.getX()) {
                     return 1;
                 } else {
-                    // В случае совпадений иксов - распределение
-                    // сначала левые, потом правые:
+                    // If the X coordinates are the same, then
+                    // the left point should go before the right one
                     if (p1.isLeft() && p2.isRight()) {
                         return -1;
                     } else if (p1.isRight() && p2.isLeft()) {
                         return 1;
                     } else {
-                        // В случае совпадений конечности -
-                        // распределение по y
+                        // If still the same, then sort by the Y coordinate
                         if (p1.getY() < p2.getY()) {
                             return -1;
                         } else if (p1.getY() > p2.getY()) {
