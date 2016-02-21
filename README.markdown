@@ -1,6 +1,6 @@
 <h1>Computational geometry in Java</h1>
 
-The project contains both implementations and visualization tools for basic computational geometry algorithms in two-dimensional space. These algorithms are implemented in Java programming language and are visualized using the Swing libraries. This is a NetBeans 7.0.1 project. <br><br>
+The project contains both implementations and visualization tools for basic computational geometry algorithms in two-dimensional space. These algorithms are implemented in Java programming language and are visualized using the Swing libraries.<br><br>
 
 <h2>List of implemented algorithms:</h2>
 
